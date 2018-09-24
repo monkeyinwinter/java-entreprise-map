@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Campus - Maps</title>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    
+    <style>
+    html, body { margin:50px 0; padding:0; }
+    #map { 
+		height: 300px; width:80%; margin:0 auto;
+		-webkit-box-shadow: 0 2px 3px 3px rgba(0,0,0,0.2);
+		box-shadow: 0 2px 3px 3px rgba(0,0,0,0.2);
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+	}
+    </style>
+</head>
+
+<body>
+	<div id="map" data-src="data/cities.json">
+        <p style="display:none">Nothing to display</p>
+    </div>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script type="text/javascript" src="javascript/map.js"></script>
+</body>
+</html>

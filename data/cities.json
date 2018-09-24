@@ -1,0 +1,6 @@
+{
+	"entreprises":[
+		{"name":"Let's Co","sector":"Computing","address":"24 Avenue Adrien Fayolle","postcode":"26400","city":"Crest","coord":[44.727431, 5.030212]},
+		{"name":"Campus Numérique","sector":"Education","address":"33 Grande Rue","postcode":"26000","city":"Valence","coord":[44.932884, 4.890958]}
+	],
+}
