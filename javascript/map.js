@@ -17,11 +17,12 @@ jQuery.noConflict();
         }).addTo(map);
 
         // Display all entreprises as marker.
-        // for (var i = 0; i < data.length; i++) {
-            coord = [39.61, -105.02];
-            L.marker(coord).bindPopup('Entreprise name').addTo(map);
+        $.each(data, function(key, entreprise) {
+            // console.log(entreprise);
+            coord = entreprise.coord; //[39.61, -105.02];
+            L.marker(coord).bindPopup(entreprise.name).addTo(map);
             points.push(coord);
-        // }
+        });
 
         // Fit map to bounds.
         var bounds = new L.LatLngBounds(points);
@@ -29,7 +30,7 @@ jQuery.noConflict();
     }
 
     $(document).ready(function () {
-        $.getJSON($('#map').data('src'), {}, buildMap);
+        $.getJSON($('#map').data('src'), buildMap);
     });
 
 }(jQuery));
