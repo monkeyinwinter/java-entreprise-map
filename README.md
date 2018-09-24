@@ -1,12 +1,3 @@
-JAVA
-
-- collections
-- debug
-- tests unitaires / intégration continue
-- api
-
-https://education.toutcomment.com/article/quelle-difference-entre-but-et-objectif-12378.html
-
 But : 
  - Afficher la liste des entreprises françaises, par secteur d'activité, sur une carte.
 
