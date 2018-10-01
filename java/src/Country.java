@@ -4,6 +4,13 @@ public class Country {
     public String name;
     public String indicateur;
 
+    public Country (int idCountry, String nameCountry, String indicateurCountry) {
+        this.id = idCountry;
+        this.name = nameCountry;
+        this.indicateur = indicateurCountry;
+    }
+    public Country() {}
+
     public void setId(int id) {
         this.id = id;
     }
@@ -26,12 +33,6 @@ public class Country {
 
     public String getName() {
         return name;
-    }
-
-    public Country (int idCountry, String nameCountry, String indicateurCountry) {
-        this.id = idCountry;
-        this.name = nameCountry;
-        this.indicateur = indicateurCountry;
     }
 
     @Override
