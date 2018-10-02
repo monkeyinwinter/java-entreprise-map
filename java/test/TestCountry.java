@@ -24,19 +24,19 @@ class TestCountry {
             String[] line;
             line = reader.readNext();
             boolean crasher = true;
-            int id=0;
+            int id = 0;
             while (crasher) {
-                if (line.length == 1 && (line[0].equals("") || line[0] == null )) {
+                if (line.length == 1 && (line[0].equals("") || line[0] == null)) {
                     if ((line = reader.readNext()) == null) {
                         crasher = false;
                     }
                 } else {
                     id++;
-                    if( line[0].equals("Id" ) ){
+                    if (line[0].equals("Id")) {
                         line = reader.readNext();
-                   }
+                    }
 
-                    if( line[0].equals("")) line[0]= Integer.toString(id);
+                    if (line[0].equals("")) line[0] = Integer.toString(id);
 
                     //On crér l'objet Country
                     countries.add(new Country(Integer.parseInt(line[0].trim()), line[1].trim(), line[2].trim()));
@@ -54,36 +54,21 @@ class TestCountry {
 
     @Test
     void noProb() {
-        List<Country> countryList = getCountryList("1");
-        assertEquals("France", countryList.get(0).getName());
-        assertEquals("Belgique", countryList.get(1).getName());
-        assertEquals("Allemagne", countryList.get(2).getName());
+        List<Country> countryList = new ArrayList<Country>();
+        for (int i = 1; i <= 6; i++) {
+            countryList = getCountryList(Integer.toString(i));
+            assertEquals(1, countryList.get(0).getId());
+            assertEquals("France", countryList.get(0).getName());
+            assertEquals("FR", countryList.get(0).getLibelle());
+            assertEquals(2, countryList.get(1).getId());
+            assertEquals("Belgique", countryList.get(1).getName());
+            assertEquals("BE", countryList.get(1).getLibelle());
+            assertEquals(3, countryList.get(2).getId());
+            assertEquals("Allemagne", countryList.get(2).getName());
+            assertEquals("DE", countryList.get(2).getLibelle());
+            System.out.println("CSV " + Integer.toString(i) + " -> OK");
+        }
 
-
-        countryList = getCountryList("2");
-        assertEquals("France", countryList.get(0).getName());
-        assertEquals("Belgique", countryList.get(1).getName());
-        assertEquals("Allemagne", countryList.get(2).getName());
-
-        countryList = getCountryList("3");
-        assertEquals("France", countryList.get(0).getName());
-        assertEquals("Belgique", countryList.get(1).getName());
-        assertEquals("Allemagne", countryList.get(2).getName());
-
-        countryList = getCountryList("4");
-        assertEquals("France", countryList.get(0).getName());
-        assertEquals("Belgique", countryList.get(1).getName());
-        assertEquals("Allemagne", countryList.get(2).getName());
-
-        countryList = getCountryList("5");
-        assertEquals("France", countryList.get(0).getName());
-        assertEquals("Belgique", countryList.get(1).getName());
-        assertEquals("Allemagne", countryList.get(2).getName());
-
-        countryList = getCountryList("6");
-        assertEquals("France", countryList.get(0).getName());
-        assertEquals("Belgique", countryList.get(1).getName());
-        assertEquals("Allemagne", countryList.get(2).getName());
 
     }
 }
