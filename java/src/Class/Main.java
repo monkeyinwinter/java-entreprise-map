@@ -8,7 +8,8 @@ public class Main {
     public static void main(String[] arg) {
 
         File reposit;
-        reposit = new File("/home/vincent/sites/java-entreprise-map/java/data");
+        //reposit = new File("/home/vincent/sites/java-entreprise-map/java/data");
+        reposit = new File("C:/Users/T3rA/Documents/GitHub/java-entreprise-map/java/data");
 
         if (reposit.exists()) {
 

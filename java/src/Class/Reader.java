@@ -10,7 +10,8 @@ public class Reader {
 
     public static List<Country> readCSV(String name) {
 
-        String csvFile = "/home/vincent/sites/java-entreprise-map/java/data/" + name;
+        //String csvFile = "/home/vincent/sites/java-entreprise-map/java/data/" + name;
+        String csvFile = "C:/Users/T3rA/Documents/GitHub/java-entreprise-map/java/data/" + name;
         BufferedReader br = null;
         String line = "";
         String csvSplitBy = ",";
