@@ -1,9 +1,11 @@
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
+import io.vavr.collection.Array;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -13,23 +15,36 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        List<City> cityList = getCityList();
-        storeJson(cityList);
+
+
+//        List<City> cityList = getCityList();
+//        storeJson(cityList, "data/cities.json");
+//        List<Insee> inseeList = getInseeList();
     }
 
     /**
      * @param object
      * @return boolean
      */
-    static boolean storeJson(Object object) {
+    static boolean storeJson(Object object, String jsonPath) {
         Gson gson = new Gson();
-        try (FileWriter fileWriter = new FileWriter("data/cities.json")) {
+        try (FileWriter fileWriter = new FileWriter(jsonPath)) {
             gson.toJson(object, fileWriter);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    static HashMap<String, String> getGeoloc() {
+        List<City> cityList = getCityList();
+        HashMap<String, String> geoloc = new HashMap<>();
+
+        for (City city : cityList) {
+            geoloc.put(city.getCodePostal(), city.getGeoLoc());
+        }
+        return geoloc;
     }
 
     /**
@@ -42,7 +57,6 @@ public class Main {
             FileInputStream fileInputStream = new FileInputStream("data/country" + number + ".csv");
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
             CSVReader reader = new CSVReader(inputStreamReader);
-
             String[] line;
             line = reader.readNext();
             boolean crasher = true;
@@ -64,6 +78,53 @@ public class Main {
         }
 
         return countries;
+    }
+
+    /**
+     * @return List<City>
+     */
+    static List<Insee> getInseeList() {
+        HashMap<String, String> geolocTable = getGeoloc();
+
+        List<Insee> inseeList = new ArrayList<Insee>();
+        try {
+            FileInputStream fileInputStream = new FileInputStream("/home/gro/Bureau/sirene_201808_L_M/sirc-17804_9075_61173_201808_L_M_20180901_015350280.csv");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+            CSVReader reader = new CSVReader(inputStreamReader, ';');
+
+            String[] line;
+            line = reader.readNext();
+            boolean crasher = true;
+            int jsonNumber = 0;
+            int count = 0;
+            while (crasher) {
+                if (line.length == 1 && (line[0].equals("") || line[0] == null)) {
+                    if ((line = reader.readNext()) == null) {
+                        crasher = false;
+                    }
+                } else {
+                    count++;
+//                    if (line[20].equals("26000")) {
+                    Insee insee = new Insee(line[0], line[16], line[18], line[19], line[20], line[28], line[43]);
+                    inseeList.add(insee);
+//                    }
+                    if (count == 1000000) {
+                        jsonNumber++;
+                        System.out.println(Integer.toString(jsonNumber) + " million");
+
+                        System.out.println(Integer.toString(inseeList.size()) + " trouvé a valence !");
+                        count = 0;
+                    }
+                    if ((line = reader.readNext()) == null) {
+                        crasher = false;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return inseeList;
     }
 
     /**
