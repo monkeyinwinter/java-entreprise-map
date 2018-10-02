@@ -48,4 +48,16 @@ public class Test1 {
         Assert.assertTrue(result.size() == 3);
 
     }
+
+    @Test
+    public void test5() throws IOException {
+        CountryDAO dao = new CountryDAO();
+        List<Country> result = dao.findCoutries("data/", "country5.csv", true);
+
+        Assert.assertTrue(result.get(1).getName().equals("Belgique"));
+        Assert.assertTrue(result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR"));
+        Assert.assertTrue(result.size() == 3);
+
+    }
+
 }

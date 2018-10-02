@@ -32,11 +32,12 @@ public class CountryDAO extends Country {
 
         while ((nextLine = csvReader.readNext()) != null) {
 
-
             int size = nextLine.length;
 
             if (size > 1) {
-                int id = Integer.parseInt(nextLine[0].trim());
+                if (nextLine[0].length() > 1) {
+                    int id = Integer.parseInt(nextLine[0].trim());
+            }
                 //System.out.println(id);
                 String name = nextLine[1].trim();
                 //System.out.println(name);
