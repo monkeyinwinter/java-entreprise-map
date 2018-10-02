@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryDAO {
+public class CountryDAO extends Country {
 
     private final static String RESSOURCE_PATH = "data/";
     private final static String COUNTRY_FILE_NAME = "country1.csv";
@@ -25,27 +26,29 @@ public class CountryDAO {
 
         // List<String> data = new ArrayList<String[]>();
 
-        while((nextLine = csvReader.readNext())!=null)  {
-            // nextLine = [1,France,FR]
-           // int size = nextLine.length;
+        while ((nextLine = csvReader.readNext()) != null) {
+            int size = nextLine.length;
 
-           // new country
-           // result = country(); // mettre country dedans
-
-            data.add(nextLine);
+            if (size != 0) {
+                data.add(nextLine);
+            }
         }
 
-        List<Country> countries = new ArrayList<Country>();
+        List<Country> countries = new ArrayList<>();
         for (String[] oneData : data) {
             int id = Integer.parseInt(oneData[0]);
+            System.out.println(id);
             String name = oneData[1];
+            System.out.println(name);
             String indicateur = oneData[2];
+            System.out.println(indicateur);
 
             Country country = new Country(id, name, indicateur);
             countries.add(country);
         }
 
+        System.out.println(countries);
         return countries;
     }
-
 }
+

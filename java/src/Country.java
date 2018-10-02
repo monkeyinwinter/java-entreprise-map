@@ -37,6 +37,6 @@ public class Country {
 
     @Override
     public String toString() {
-        return this.getId() + " " + this.name + " " + this.indicateur + " walou ";
+        return this.getId() + " " + this.getName() + " " + this.getIndicateur();
     }
 }

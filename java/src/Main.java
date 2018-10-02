@@ -8,13 +8,14 @@ public class Main {
 
     public static void main(String[] args) {
 
+        List<Country> result = null;
         CountryDAO dao = new CountryDAO();
         try {
-            dao.findCoutries();
+            result = dao.findCoutries();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(countries);
+        System.out.println(result);
     }
 
 
