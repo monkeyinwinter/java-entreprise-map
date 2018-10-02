@@ -20,24 +20,32 @@ public class CountryDAO {
 
         CSVReader csvReader = new CSVReader(fr, SEPARATOR);
 
-        //List<String[]> data = new ArrayList<String[]>();
+        List<String[]> data = new ArrayList<String[]>();
         String[] nextLine = null;
-        List<Country> result = new ArrayList<>();
 
-        while((nextLine = csvReader.readNext())!=null)
+        // List<String> data = new ArrayList<String[]>();
 
-        {
+        while((nextLine = csvReader.readNext())!=null)  {
             // nextLine = [1,France,FR]
            // int size = nextLine.length;
 
+           // new country
+           // result = country(); // mettre country dedans
 
-
-           new Country();
-           //result = country()// mettre country dedans
-
-            //data.add(nextLine);
+            data.add(nextLine);
         }
 
-        return result;
+        List<Country> countries = new ArrayList<Country>();
+        for (String[] oneData : data) {
+            int id = Integer.parseInt(oneData[0]);
+            String name = oneData[1];
+            String indicateur = oneData[2];
+
+            Country country = new Country(id, name, indicateur);
+            countries.add(country);
+        }
+
+        return countries;
     }
+
 }
