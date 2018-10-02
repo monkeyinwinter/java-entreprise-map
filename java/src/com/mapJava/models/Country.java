@@ -2,38 +2,32 @@ package com.mapJava.models;
 
 public class Country {
 
-    private int id;
+    private String id;
     private String name;
     private String code;
 
-    public Country(int id, String name, String code) {
+    public Country(String id, String name, String code) {
+
         this.id = id;
         this.name = name;
         this.code = code;
     }
 
-    public int getId() {
+    private String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    private String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
+    private String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    @Override
+    public boolean equals(Object obj) {
+        Country country = (Country) obj;
+        return this.id.contentEquals(country.getId()) && this.name.contentEquals(country.getName()) && this.code.contentEquals(country.getCode());
     }
-
 }
