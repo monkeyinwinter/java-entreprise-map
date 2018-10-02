@@ -15,7 +15,15 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(result);
+        Test1 test = new Test1();
+        Test1 test2 = new Test1();
+        Test1 test3 = new Test1();
+        boolean resultatTest = test.test1(result);
+        boolean resultatTest2 = test2.test2(result);
+        boolean resultatTest3 = test3.test3(result);
+        System.out.println(resultatTest);
+        System.out.println(resultatTest2);
+        System.out.println(resultatTest3);
     }
 
 
