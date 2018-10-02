@@ -1,37 +1,51 @@
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.io.IOException;
 import java.util.List;
 
 public class Test1 {
 
-    public boolean test1(List<Country> result) {
+    @Test
+    public void test1() throws IOException {
+        CountryDAO dao = new CountryDAO();
+        List<Country> result = dao.findCoutries("data/", "country1.csv", false);
 
-        if (result.get(1).getName().equals("Belgique")) {
-            System.out.println("La Belgique occupe bien l'index 1");
-        } else {
-            return false;
-        }
-        return true;
+        Assert.assertTrue(result.get(1).getName().equals("Belgique"));
+        Assert.assertTrue(result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR"));
+        Assert.assertTrue(result.size() == 3);
     }
 
-    public boolean test2(List<Country> result) {
+    @Test
+    public void test2() throws IOException {
+        CountryDAO dao = new CountryDAO();
+        List<Country> result = dao.findCoutries("data/", "country2.csv", false);
 
-        if (result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR")) {
-            System.out.println("FR correspond bien à la France");
-        } else {
-            return false;
-        }
-        return true;
+        Assert.assertTrue(result.get(1).getName().equals("Belgique"));
+        Assert.assertTrue(result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR"));
+        Assert.assertTrue(result.size() == 3);
+
     }
 
-    public boolean test3(List<Country> result) {
+    @Test
+    public void test3() throws IOException {
+        CountryDAO dao = new CountryDAO();
+        List<Country> result = dao.findCoutries("data/", "country3.csv", false);
 
-        int nb_pays = result.size();
-        int compare_to = 3;
+        Assert.assertTrue(result.get(1).getName().equals("Belgique"));
+        Assert.assertTrue(result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR"));
+        Assert.assertTrue(result.size() == 3);
 
-        if (nb_pays == compare_to) {
-            System.out.println("Oui il y a bien 3 pays");
-        } else {
-            return false;
-        }
-        return true;
+    }
+
+    @Test
+    public void test4() throws IOException {
+        CountryDAO dao = new CountryDAO();
+        List<Country> result = dao.findCoutries("data/", "country4.csv", true);
+
+        Assert.assertTrue(result.get(1).getName().equals("Belgique"));
+        Assert.assertTrue(result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR"));
+        Assert.assertTrue(result.size() == 3);
+
     }
 }
