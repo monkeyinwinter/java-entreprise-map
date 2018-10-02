@@ -1,9 +1,5 @@
-import com.opencsv.CSVReader;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,61 +10,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class TestCountry {
 
-    private List<Country> getCountryList(String number) {
-        List<Country> countries = new ArrayList<Country>();
-        try {
-            FileInputStream fileInputStream = new FileInputStream("data/country" + number + ".csv");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
-            CSVReader reader = new CSVReader(inputStreamReader);
-
-            String[] line;
-            line = reader.readNext();
-            boolean crasher = true;
-            int id = 0;
-            while (crasher) {
-                if (line.length == 1 && (line[0].equals("") || line[0] == null)) {
-                    if ((line = reader.readNext()) == null) {
-                        crasher = false;
-                    }
-                } else {
-                    id++;
-                    if (line[0].equals("Id")) {
-                        line = reader.readNext();
-                    }
-
-                    if (line[0].equals("")) line[0] = Integer.toString(id);
-
-                    //On crér l'objet Country
-                    countries.add(new Country(Integer.parseInt(line[0].trim()), line[1].trim(), line[2].trim()));
-                    if ((line = reader.readNext()) == null) {
-                        crasher = false;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return countries;
-    }
 
     @Test
     void noProb() {
-        List<Country> countryList = new ArrayList<Country>();
+        List<Country> countryList;
         for (int i = 1; i <= 6; i++) {
-            countryList = getCountryList(Integer.toString(i));
-            assertEquals(1, countryList.get(0).getId());
+            countryList = Main.getCountryList(Integer.toString(i));
+            assertEquals("1", countryList.get(0).getId());
             assertEquals("France", countryList.get(0).getName());
             assertEquals("FR", countryList.get(0).getLibelle());
-            assertEquals(2, countryList.get(1).getId());
+            assertEquals("2", countryList.get(1).getId());
             assertEquals("Belgique", countryList.get(1).getName());
             assertEquals("BE", countryList.get(1).getLibelle());
-            assertEquals(3, countryList.get(2).getId());
+            assertEquals("3", countryList.get(2).getId());
             assertEquals("Allemagne", countryList.get(2).getName());
             assertEquals("DE", countryList.get(2).getLibelle());
             System.out.println("CSV " + Integer.toString(i) + " -> OK");
         }
-
-
     }
 }
