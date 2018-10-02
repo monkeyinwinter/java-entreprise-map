@@ -24,7 +24,7 @@ public class Main {
     static boolean storeJson(Object object) {
         Gson gson = new Gson();
         try (FileWriter fileWriter = new FileWriter("data/cities.json")) {
-            gson.toJson(object);
+            gson.toJson(object, fileWriter);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
