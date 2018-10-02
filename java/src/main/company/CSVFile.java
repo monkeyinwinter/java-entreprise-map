@@ -8,36 +8,50 @@ import java.util.List;
 public class CSVFile {
 
 
-   public List<Country> readCsv1() {
+    public List<Country> readCsv(String file) {
 
-        String file = "data/country2.csv";
-       List<Country> result = new ArrayList<>();
-       FileReader fr;
-       BufferedReader br;
+        List<Country> result = new ArrayList<>();
+        FileReader fr;
+        BufferedReader br;
+        String[] str;
+
+        int id = 1;
 
         try {
             fr = new FileReader(file);
             br = new BufferedReader(fr);
-            String line;
 
-                for (line = br.readLine(); line != null; line = br.readLine()) {
 
-                    String[] str = line.split(",");
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
+
+                try {
+
+                    str = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+
+                    for (int i = 0; i < str.length; i++) {
+                        str[i] = str[i].trim();
+                        str[i] = str[i].replace("\"", "");
+                    }
 
                     Country country = new Country();
-                    country.setId(Integer.parseInt(str[0]));
+                    if (str[0].equals("")) {
+                        country.setId(id);
+                        id++;
+                    } else {
+                        country.setId(Integer.parseInt(str[0]));
+                        id++;
+                    }
                     country.setName(str[1]);
                     country.setCode(str[2]);
                     result.add(country);
-                }
-        }
-        catch(Exception e){
-                e.printStackTrace();
-            }
 
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return result;
     }
-
-
-
 }
