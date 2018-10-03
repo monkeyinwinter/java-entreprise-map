@@ -2,87 +2,76 @@ package test;
 
 import main.company.CSVFile;
 import main.company.Country;
-import org.junit.jupiter.api.Assertions;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
+
+
 class CSVFileTest extends CSVFile {
 
-//    @BeforeEach
-//    public void initEach() {
-//        CSVFile csv = new CSVFile();
-//    }
 
     @Test
-    void testReadCsv1() {
+    void readFile() {
 
         CSVFile csv = new CSVFile();
 
         List<Country> result = csv.readCsv("data/country1.csv");
 
-        Assertions.assertEquals(result.get(0).getName(), "France");
-        Assertions.assertNotEquals(result.iterator().next().getId(), "2" );
-        Assertions.assertEquals(result.get(1).getCode(), "BE");
-
+        assertThat(result.get(0).getName()).isEqualTo("France");
+        assertThat(result.get(1).getCode()).isEqualTo("BE");
+        assertThat(result.get(2).getId()).isEqualTo(3);
     }
 
     @Test
-    void testReadCsv2 () {
+    void shouldIgnoreEmptyLines() {
         CSVFile csv = new CSVFile();
 
         List<Country> result = csv.readCsv("data/country2.csv");
 
-        Assertions.assertEquals(result.get(0).getName(), "France");
-        Assertions.assertEquals(result.get(1).getCode(), "BE");
-        Assertions.assertEquals(result.get(2).getId(), 3);
+        assertThat(result.size()).isEqualTo(3);
     }
 
     @Test
-    void testReadCsv3() {
+    void shouldIgnoreBlanks() {
         CSVFile csv = new CSVFile();
 
         List<Country> result = csv.readCsv("data/country3.csv");
 
-        Assertions.assertEquals(result.get(0).getName(), "France");
-        Assertions.assertNotEquals(result.get(1).getCode(), "  BE");
-        Assertions.assertNotEquals(result.get(2).getId(), "3 ");
-
-
+        assertThat(result.get(1).getCode()).isNotEqualTo("  BE");
+        assertThat(result.get(2).getId()).isNotEqualTo("3 ");
     }
+
     @Test
-    void testReadCsv4() {
+    void shouldIgnoreHeader() {
         CSVFile csv = new CSVFile();
 
         List<Country> result = csv.readCsv("data/country4.csv");
 
-        Assertions.assertEquals(result.get(0).getName(), "France");
-        Assertions.assertEquals(result.get(1).getCode(), "BE");
-        Assertions.assertNotEquals(result.get(2).getId(), "3 ");
+        assertThat(result.get(0).getId()).isNotEqualTo("Id");
+        assertThat(result.size()).isEqualTo(3);
     }
+
     @Test
-    void testReadCsv5() {
+    void shouldAddIdIfEmpty() {
         CSVFile csv = new CSVFile();
 
         List<Country> result = csv.readCsv("data/country5.csv");
 
-        Assertions.assertEquals(result.get(0).getName(), "France");
-        Assertions.assertNotEquals(result.get(1).getCode(), "  BE");
-        Assertions.assertNotEquals(result.get(2).getId(), "3 ");
+        for (int i =0; i< result.size(); i++) {
+            assertThat(result.get(i).getId()).isEqualTo(i+1);
+        }
     }
 
     @Test
-    void testReadCsv6() {
+    void shouldReadTextBetweenDoubleQuotes() {
         CSVFile csv = new CSVFile();
 
         List<Country> result = csv.readCsv("data/country6.csv");
 
-        Assertions.assertEquals("Heard, Ile et MacDonald, îles",result.get(3).getName());
-        Assertions.assertEquals("Viet Nam (Sud)", result.get(4).getName());
-        Assertions.assertEquals(result.get(5).getName(), "Wallis et Futuna");
-        Assertions.assertEquals(9, result.size());
+        assertThat(result.get(3).getName()).isEqualTo("Heard, Ile et MacDonald, îles");
     }
 
 }
