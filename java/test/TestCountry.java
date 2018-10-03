@@ -39,7 +39,7 @@ class TestCountry {
                     if( line[0].equals("")) line[0]= Integer.toString(id);
 
                     //On crér l'objet Country
-                    countries.add(new Country(Integer.parseInt(line[0].trim()), line[1].trim(), line[2].trim()));
+                    countries.add(new Country(line[0].trim(), line[1].trim(), line[2].trim()));
                     if ((line = reader.readNext()) == null) {
                         crasher = false;
                     }
