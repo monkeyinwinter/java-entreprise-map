@@ -1,4 +1,3 @@
-
 public class Pays {
     private Integer id;
     private String name;
@@ -40,4 +39,5 @@ public class Pays {
     public String toString() {
         return "Id -> " + getId() + "Name -> " + getName() + "Code -> " + getCode();
     }
+
 }

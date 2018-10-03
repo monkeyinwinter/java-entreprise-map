@@ -27,24 +27,33 @@ public class PaysDao
 
         Integer i = 0;
 
-        if (this.header == true) i = 1;
+        if (this.header == true)
+        {
+            i = 1;//condition pour fichier 4 ligne titre
+        }
 
         for ( ; i < lignes.size() ; i++)
         {
-            String ligneBrut = lignes.get(i);
+            String lignePropre;
+            String ligneBrut3;
+            String[] champs;
 
-/*            if (lignes.indexOf("\"") ==-1)// pour test fichier 6
+            String ligneBrut1 = lignes.get(i);
+
+            String ligneBrut2 = ligneBrut1.replaceAll("\"", " separateur ");//pour fichier 6 guillemets
+
+            if (ligneBrut2.contains(" separateur "))// pour test fichier 6
             {
-                System.out.println("presence de \"");
+                ligneBrut3 = ligneBrut2.replaceAll(",", "");
+
+                lignePropre = ligneBrut3.replaceAll(" separateur ", ",");
             }
             else
             {
-                System.out.println("absence de \"");
+                lignePropre = ligneBrut2;
             }
 
-            String lignePropre = ligneBrut.replaceAll("\"", "");*/
-
-            String[] champs = ligneBrut.split(",");
+            champs = lignePropre.split(",");
 
             if (champs.length >= 3)
             {

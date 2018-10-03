@@ -14,7 +14,7 @@ public class Main
     public static void main(String[] args) throws IOException
     {
         PaysDao dao = new PaysDao(true);
-        List<Pays> mylist = dao.read("data/country5.csv");
+        List<Pays> mylist = dao.read("data/country6.csv");
 
         for(Pays pays : mylist)
         {
