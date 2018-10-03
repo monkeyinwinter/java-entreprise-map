@@ -18,8 +18,8 @@ public class Main {
 
 
 //        List<City> cityList = getCityList();
-//        storeJson(cityList, "data/cities.json");
-//        List<Insee> inseeList = getInseeList();
+        List<Company> companyList = getCompanyList();
+        storeJson(companyList, "data/cities15kmFromValence.json");
     }
 
     /**
@@ -42,9 +42,69 @@ public class Main {
         HashMap<String, String> geoloc = new HashMap<>();
 
         for (City city : cityList) {
-            geoloc.put(city.getCodePostal(), city.getGeoLoc());
+            if (!city.getGeoLoc().equals("Nowhere")) {
+                geoloc.put(city.getCodePostal(), city.getGeoLoc());
+
+            }
         }
         return geoloc;
+    }
+
+    /**
+     * @return List<City>
+     */
+    static List<Company> getCompanyList() {
+        HashMap<String, String> geolocTable = getGeoloc();
+
+        List<Company> companyList = new ArrayList<Company>();
+        try {
+            FileInputStream fileInputStream = new FileInputStream("/home/gro/Bureau/sirene_201808_L_M/sirc-17804_9075_61173_201808_L_M_20180901_015350280.csv");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+            CSVReader reader = new CSVReader(inputStreamReader, ';');
+
+            String[] line;
+            line = reader.readNext();
+            boolean crasher = true;
+            int jsonNumber = 0;
+            int count = 0;
+            while (crasher) {
+                if (line.length == 1 && (line[0].equals("") || line[0] == null)) {
+                    if ((line = reader.readNext()) == null) {
+                        crasher = false;
+                    }
+                } else {
+                    count++;
+                    if (geolocTable.containsKey(line[20])) {
+                        String coord = geolocTable.get(line[20]);
+                        String[] coords = coord.split(",");
+                        if ((Float.parseFloat(coords[0].trim()) > 44.79) && (Float.parseFloat(coords[0].trim()) < 45.06)) {
+                            if ((Float.parseFloat(coords[1].trim()) > 4.71) && (Float.parseFloat(coords[1].trim()) < 5.09)) {
+//                                public Insee(String SIREN, String NUMVOIE, String TYPVOIE, String LIBVOIE, String CODPOS, String LIBCOM, String LIBAPET) {
+//                                Insee insee = new Insee(line[0], line[16], line[18], line[19], line[20], line[28], line[43]);
+
+
+//                                String name, String sector, String adress, String postCode, String city, String[] coord
+                                Company company = new Company(line[0], line[43], line[16] + " " + line[18] + " " + line[19], line[20], line[28], coords);
+                                companyList.add(company);
+                            }
+                        }
+                    }
+                    if (count == 1000000) {
+                        jsonNumber++;
+                        System.out.println(Integer.toString(jsonNumber) + " million");
+
+                        count = 0;
+                    }
+                    if ((line = reader.readNext()) == null) {
+                        crasher = false;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return companyList;
     }
 
     /**
@@ -103,16 +163,25 @@ public class Main {
                         crasher = false;
                     }
                 } else {
+//                    if (line[20].equals("") || line[20] == null) line[20] = "empty";
                     count++;
+                    if (geolocTable.containsKey(line[20])) {
+                        String coord = geolocTable.get(line[20]);
+                        String[] coords = coord.split(",");
+                        if ((Float.parseFloat(coords[0].trim()) > 44.79) && (Float.parseFloat(coords[0].trim()) < 45.06)) {
+                            if ((Float.parseFloat(coords[1].trim()) > 4.71) && (Float.parseFloat(coords[1].trim()) < 5.09)) {
+                                Insee insee = new Insee(line[0], line[16], line[18], line[19], line[20], line[28], line[43]);
+                                inseeList.add(insee);
+                            }
+                        }
+                    }
 //                    if (line[20].equals("26000")) {
-                    Insee insee = new Insee(line[0], line[16], line[18], line[19], line[20], line[28], line[43]);
-                    inseeList.add(insee);
 //                    }
                     if (count == 1000000) {
                         jsonNumber++;
                         System.out.println(Integer.toString(jsonNumber) + " million");
 
-                        System.out.println(Integer.toString(inseeList.size()) + " trouvé a valence !");
+//                        System.out.println(Integer.toString(inseeList.size()) + " trouvé a valence !");
                         count = 0;
                     }
                     if ((line = reader.readNext()) == null) {
@@ -150,7 +219,7 @@ public class Main {
                         City city = new City(line[0].trim(), line[1].trim(), line[2].trim(), line[5].trim());
                         cities.add(city);
                     } else {
-                        City city = new City(line[0].trim(), line[1].trim(), line[2].trim(), "NoGeoloc");
+                        City city = new City(line[0].trim(), line[1].trim(), line[2].trim(), "Nowhere");
                         cities.add(city);
                     }
                     if ((line = reader.readNext()) == null) {
