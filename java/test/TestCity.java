@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
 
 /**
  * @author gro
@@ -10,10 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TestCity {
     @Test
-    void noProb() {
+    void testCsvPostaux() {
         List<City> cityList = Main.getCityList();
+        assertThat(cityList)
+                .hasSize(39202)
+                .extracting("code", "name", "codePostal", "geoLoc")
+                .contains(
+                        tuple("26362", "VALENCE", "26000", "44.9229811667, 4.91444013136")
+                )
+                .doesNotContain(
+                        tuple("26362", "PARIS", "26000", "44.9229811667, 4.91444013136"),
+                        tuple("", "", "", "")
+                );
 
-        assertEquals("91248", cityList.get(25).getCode());
 
     }
 }

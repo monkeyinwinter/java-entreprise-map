@@ -125,6 +125,10 @@ public class Main {
                     if ((line = reader.readNext()) == null) {
                         crasher = false;
                     }
+                } else if (line[0].equals("Id")) {
+                    if ((line = reader.readNext()) == null) {
+                        crasher = false;
+                    }
                 } else {
                     if (line[0].equals("")) line[0] = "";
                     countries.add(new Country(line[0].trim(), line[1].trim(), line[2].trim()));
