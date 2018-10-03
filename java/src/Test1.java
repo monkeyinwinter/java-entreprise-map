@@ -60,4 +60,15 @@ public class Test1 {
 
     }
 
+    @Test
+    public void test6() throws IOException {
+        CountryDAO dao = new CountryDAO();
+        List<Country> result = dao.findCoutries("data/", "country6.csv", true);
+
+        Assert.assertTrue(result.get(1).getName().equals("Belgique"));
+        Assert.assertTrue(result.get(0).getName().equals("France") && result.get(0).getIndicateur().equals("FR"));
+        Assert.assertTrue(result.size() == 9);
+
+    }
+
 }

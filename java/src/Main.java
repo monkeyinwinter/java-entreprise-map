@@ -10,7 +10,7 @@ public class Main {
         List<Country> result = null;
         CountryDAO dao = new CountryDAO();
         try {
-            result = dao.findCoutries("data/", "country1.csv", true);
+            result = dao.findCoutries("data/", "country1.csv", false);
         } catch (IOException e) {
             e.printStackTrace();
         }
