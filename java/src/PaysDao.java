@@ -31,11 +31,27 @@ public class PaysDao
 
         for ( ; i < lignes.size() ; i++)
         {
-            String ligne = lignes.get(i); // une ligne du fichier
+            String ligneBrut = lignes.get(i);
 
-            String[] champs = ligne.split(",");
+/*            if (lignes.indexOf("\"") ==-1)// pour test fichier 6
+            {
+                System.out.println("presence de \"");
+            }
+            else
+            {
+                System.out.println("absence de \"");
+            }
 
-            if (champs.length >= 3) {
+            String lignePropre = ligneBrut.replaceAll("\"", "");*/
+
+            String[] champs = ligneBrut.split(",");
+
+            if (champs.length >= 3)
+            {
+                if(champs[0].isEmpty())
+                {
+                    champs[0] = "1";
+                }
 
                 String id = champs[0].trim();
                 String name = champs[1].trim();

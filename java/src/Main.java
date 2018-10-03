@@ -13,8 +13,8 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
-        PaysDao dao = new PaysDao(false);
-        List<Pays> mylist = dao.read("data/country4.csv");
+        PaysDao dao = new PaysDao(true);
+        List<Pays> mylist = dao.read("data/country5.csv");
 
         for(Pays pays : mylist)
         {

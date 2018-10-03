@@ -26,12 +26,13 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.10.0</version>
+            <scope>PaysDaoTest</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.2.0</version>
-            <scope>test</scope>
+            <scope>PaysDaoTest</scope>
         </dependency>
     </dependencies>
 </project>
