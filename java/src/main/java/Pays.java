@@ -1,9 +1,9 @@
 public class Pays {
-    private Integer id;
+    private String id;
     private String name;
     private String code;
 
-    public Pays(Integer id, String name, String code) {//constructeur de la class pays
+    public Pays(String id, String name, String code) {//constructeur de la class pays
         setName(name);
         setId(id);
         setCode(code);
@@ -14,11 +14,11 @@ public class Pays {
     }
 
 
-    public void setId(Integer id) {//setter id
+    public void setId(String id) {//setter id
         this.id = id;
     }
-    public int getId() {// getter id
-        return this.id.intValue();
+    public String getId() {// getter id
+        return this.id;
     }
 
     public void setName(String name) {//setter name
@@ -37,7 +37,9 @@ public class Pays {
 
     @Override
     public String toString() {
-        return "Id -> " + getId() + "Name -> " + getName() + "Code -> " + getCode();
+        return getId()
+                + getName()
+                + getCode();
     }
 
 }

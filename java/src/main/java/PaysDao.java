@@ -11,19 +11,49 @@ public class PaysDao
 {
     private boolean header;
 
-
     public PaysDao(boolean header)
     {
          this.header = header;
     }
 
+    public List<Titre> readTitre(String filepath) throws IOException
+    {
+
+        String lignePropreTitre;
+        String[] champsTitre;
+
+        Path path = Paths.get(filepath);
+
+        List<String> lignes = Files.readAllLines(path);
+
+        List<Titre> listTitre = new ArrayList<Titre>();
+
+        for ( Integer z = 0 ; z < 1 ; z++)
+        {
+            String ligneTitreBrut = lignes.get(z);
+
+            champsTitre = ligneTitreBrut.split(",");
+
+            String id = champsTitre[0].trim();
+            String name = champsTitre[1].trim();
+            String code = champsTitre[2].trim();
+            Titre titre= new Titre(id, name, code);
+
+            listTitre.add(titre);
+        }
+        return listTitre;
+    }
+
     public List<Pays> read(String filepath) throws IOException
     {
+
         Path path = Paths.get(filepath);
 
         List<String> lignes = Files.readAllLines(path);
 
         List<Pays> mylist = new ArrayList<Pays>();
+
+        String[] champs;
 
         Integer i = 0;
 
@@ -36,7 +66,7 @@ public class PaysDao
         {
             String lignePropre;
             String ligneBrut3;
-            String[] champs;
+
 
             String ligneBrut1 = lignes.get(i);
 
@@ -65,7 +95,7 @@ public class PaysDao
                 String id = champs[0].trim();
                 String name = champs[1].trim();
                 String code = champs[2].trim();
-                Pays pays = new Pays(parseInt(id), name, code);
+                Pays pays = new Pays(id, name, code);
 
                 mylist.add(pays);
             }
