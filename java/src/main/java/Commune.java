@@ -2,19 +2,15 @@ public class Commune {
 
     private Integer codePostal;
     private String nomCommune;
-    private String latGps;
-    private String lonGps;
+    private String Gps;
 
-
-    public Commune(Integer codePostal, String nomCommune, String latGps, String lonGps) {//constructeur de la class pays
+    public Commune(Integer codePostal, String nomCommune, String Gps) {//constructeur de la class pays
         setCodePostal(codePostal);
         setCommune(nomCommune);
-        setLatGps(latGps);
-        setLonGps(lonGps);
+        setGps(Gps);
     }
 
     public Commune() {//constructeur de la class Commune
-
     }
 
     public void setCodePostal(Integer codePostal) {//setter codePostal
@@ -31,27 +27,18 @@ public class Commune {
         return this.nomCommune;
     }
 
-    public void setLatGps(String gps) {//setter LatGps
-        this.latGps = latGps;
+    public void setGps(String Gps) {//setter LatGps
+        this.Gps = Gps;
     }
-    public String getLatGps() {// getter latGps
-        return this.latGps;
-    }
-
-    public void setLonGps(String lonGps) {//setter lonGps
-        this.lonGps = lonGps;
-    }
-    public String getLonGps() {// getter gps
-        return this.lonGps;
+    public String getGps() {// getter Gps
+        return this.Gps;
     }
 
     @Override
     public String toString() {
-        return "codePostal -> " + getCodePostal()
-                + "Commune -> " + getCommune()
-                + "lattitude gps -> " + getLatGps()
-                + "longitude gps -> " + getLonGps();
-
+        return  getCodePostal() +
+                getCommune() +
+                getGps();
     }
 
 

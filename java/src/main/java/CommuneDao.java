@@ -56,6 +56,8 @@ public class CommuneDao
 /*                lignePropreCommune = ligneBrutCommune2;*/
             }
 
+/*            System.out.println(ligneBrutCommune2);*/
+
             champsCommune = lignePropreCommune.split(";");
 
             if (champsCommune.length >= 3)
@@ -67,10 +69,9 @@ public class CommuneDao
 
                 String codePostal = champsCommune[2].trim();
                 String nomCommune = champsCommune[1].trim();
-                String LatGps = champsCommune[5].trim();
-                String LonGps = champsCommune[6].trim();
+                String Gps = champsCommune[4].trim() + "/" +champsCommune[5].trim();
 
-                Commune commune = new Commune(parseInt(codePostal), nomCommune, LatGps, LonGps);
+                Commune commune = new Commune(parseInt(codePostal), nomCommune, Gps);
 
                 ListCommune.add(commune);
             }
