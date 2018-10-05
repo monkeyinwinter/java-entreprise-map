@@ -37,9 +37,11 @@ public class Pays {
 
     @Override
     public String toString() {
-        return getId()
-                + getName()
-                + getCode();
+        return  getId() +
+                getName() +
+                getCode();
     }
+
+
 
 }

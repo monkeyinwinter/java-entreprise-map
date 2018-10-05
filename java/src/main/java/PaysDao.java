@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
@@ -21,7 +22,7 @@ public class PaysDao
 
         String lignePropreTitre;
         String[] champsTitre;
-
+        String id;
         Path path = Paths.get(filepath);
 
         List<String> lignes = Files.readAllLines(path);
@@ -34,13 +35,14 @@ public class PaysDao
 
             champsTitre = ligneTitreBrut.split(",");
 
-            String id = champsTitre[0].trim();
-            String name = champsTitre[1].trim();
-            String code = champsTitre[2].trim();
+            id = champsTitre[0].trim();
+            String name = "," + champsTitre[1].trim();
+            String code = "," + champsTitre[2].trim();
             Titre titre= new Titre(id, name, code);
 
             listTitre.add(titre);
         }
+
         return listTitre;
     }
 
@@ -67,8 +69,9 @@ public class PaysDao
             String lignePropre;
             String ligneBrut3;
 
-
             String ligneBrut1 = lignes.get(i);
+
+
 
             String ligneBrut2 = ligneBrut1.replaceAll("\"", " separateur ");//pour fichier 6 guillemets
 
@@ -93,15 +96,22 @@ public class PaysDao
                 }
 
                 String id = champs[0].trim();
-                String name = champs[1].trim();
-                String code = champs[2].trim();
+                String name = "," + champs[1].trim();
+                String code = "," + champs[2].trim();
                 Pays pays = new Pays(id, name, code);
 
                 mylist.add(pays);
             }
         }
-
         return mylist;
     }
+
+/*    public List<Map<String, String>> MergeTitrePays(String listTitre, String listPays) throws IOException {
+        List<Map<String, String>> test = new ArrayList<Map<String, String>>();
+
+        return test;
+    }*/
+
+
 }
 
