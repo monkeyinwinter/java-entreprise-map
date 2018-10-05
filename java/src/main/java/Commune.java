@@ -1,5 +1,5 @@
-public class Commune {
-
+public class Commune
+{
     private Integer codePostal;
     private String nomCommune;
     private String Gps;

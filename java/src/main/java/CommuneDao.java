@@ -16,6 +16,35 @@ public class CommuneDao
         this.header = header;
     }
 
+    public List<TitreCommune> readTitre(String filepath) throws IOException
+    {
+
+        String lignePropreTitre;
+        String[] champsTitre;
+        String id;
+        Path path = Paths.get(filepath);
+
+        List<String> lignes = Files.readAllLines(path);
+
+        List<TitreCommune> listTitre = new ArrayList<TitreCommune>();
+
+        for ( Integer z = 0 ; z < 1 ; z++)
+        {
+            String ligneTitreBrut = lignes.get(z);
+
+            champsTitre = ligneTitreBrut.split(";");
+
+            id = champsTitre[0].trim();
+            String name = "," + champsTitre[1].trim();
+            String code = "," + champsTitre[2].trim();
+            TitreCommune titreCommune= new TitreCommune(id, name, code);
+
+            listTitre.add(titreCommune);
+        }
+
+        return listTitre;
+    }
+
     public List<Commune> read(String filepath) throws IOException
     {
         Path path = Paths.get(filepath);

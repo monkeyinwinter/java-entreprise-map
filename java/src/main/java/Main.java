@@ -12,21 +12,20 @@ public class Main
 
         PaysDao dao = new PaysDao(true);
         PaysDao daoTitre = new PaysDao(true);
-
         CommuneDao daoCommune = new CommuneDao(true);
 
         List<Pays> listPays1 = dao.read("data/country4.csv");
         List<Titre> listTitre1 = daoTitre.readTitre("data/country4.csv");
         List<Commune> listCommune1 = daoCommune.read("data/commune.csv");
-
+        List<TitreCommune> listTitreCommune1 = daoCommune.readTitreCommune("data/commune.csv");
 
         List<String> listPays2 = new ArrayList<String>();
         List<String> listTitre2 = new ArrayList<String>();
         List<String> listCommune2 = new ArrayList<String>();
 
-        System.out.println(listCommune1);
+/*        System.out.println(listCommune1);*/
 
-        String listTitre3;C
+        String listTitre3;
         String listPays3;
 
         for(Titre titre : listTitre1)//converti list objet titre en list string
@@ -74,11 +73,6 @@ public class Main
         }
 
         System.out.println(listeKeyValue);
-
-/*        for(Commune commune: listCommune1)
-        {
-            System.out.println(commune.toString());
-        }*/
 
     }
 
