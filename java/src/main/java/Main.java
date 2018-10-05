@@ -59,21 +59,31 @@ public class Main
         Integer counter = 0;
         Integer z = 0;
 
-        for(Integer i = 0 ; i < count ; i++)
+
+
+
+        for(Integer i = 0 ; i < 3 ; i++)
         {
             HashMap<String, String> map = new HashMap<String,String>();
 
-            map.put(testTitre1[z], testPays1[counter]);
+            for (Integer x = 0 ; x < 3 ; x++)
+            {
+
+                map.put(testTitre1[z], testPays1[counter]);
+
+                counter++;
+                z++;
+
+                if(z == 3)
+                {
+                    z = 0;
+                }
+
+            }
 
             test.add(map);
 
-            counter++;
 
-            z++;
-            if(z == 3)
-            {
-                z = 0;
-            }
         }
 
         System.out.println(test);
