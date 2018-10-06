@@ -10,32 +10,34 @@ public class Main
     public static void main(String[] args) throws IOException
     {
 
-        PaysDao dao = new PaysDao(true);
-        PaysDao daoTitre = new PaysDao(true);
-        CommuneDao daoCommune = new CommuneDao(true);
+        PaysDao paysDao = new PaysDao(true);
+        PaysDao paysDaoTitre = new PaysDao(true);
+        CommuneDao communeDao = new CommuneDao(true);
+        CommuneDao communeDaoTitre = new CommuneDao(true);
 
-        List<Pays> listPays1 = dao.read("data/country4.csv");
-        List<Titre> listTitre1 = daoTitre.readTitre("data/country4.csv");
-        List<Commune> listCommune1 = daoCommune.read("data/commune.csv");
-        List<TitreCommune> listTitreCommune1 = daoCommune.readTitreCommune("data/commune.csv");
+
+        List<Pays> listPays1 = paysDao.read("data/country4.csv");
+        List<TitrePays> listPaysTitre1 = paysDaoTitre.readTitre("data/country4.csv");
+        List<Commune> listCommune1 = communeDao.read("data/commune.csv");
+        List<TitreCommune> listTitreCommune1 = communeDaoTitre.readTitreCommune("data/commune.csv");
+
 
         List<String> listPays2 = new ArrayList<String>();
-        List<String> listTitre2 = new ArrayList<String>();
+        List<String> listPaysTitre2 = new ArrayList<String>();
         List<String> listCommune2 = new ArrayList<String>();
+        List<String> listTitreCommune2 = new ArrayList<String>();
 
-/*        System.out.println(listCommune1);*/
+/*        System.out.println(listPays1);
+        System.out.println(listPaysTitre1);
+        System.out.println(listCommune1);
+        System.out.println(listTitreCommune1);*/
 
-        String listTitre3;
         String listPays3;
+        String listPaysTitre3;
+        String listCommune3;
+        String listCommuneTitre3;
 
-        for(Titre titre : listTitre1)//converti list objet titre en list string
-        {
-            listTitre2.add(String.valueOf(titre));
-        }
-
-        listTitre3 = listTitre2.stream()
-                .collect(Collectors.joining(","));
-
+///////////////////////////////Pays
         for(Pays pays : listPays1)//converti list objet pays en list string
         {
             listPays2.add(String.valueOf(pays));
@@ -44,35 +46,99 @@ public class Main
         listPays3 = listPays2.stream()
                 .collect(Collectors.joining(","));
 
-        String[] testTitre1 = listTitre3.split(",");
-        String[] testPays1 = listPays3.split(",");
+        for(TitrePays titrePays : listPaysTitre1)//converti list objet TitrePays en list string
+        {
+            listPaysTitre2.add(String.valueOf(titrePays));
+        }
 
-        List<Map<String, String>> listeKeyValue = new ArrayList<Map<String, String>>();
+        listPaysTitre3 = listPaysTitre2.stream()
+                .collect(Collectors.joining(","));
 
-        Integer counter = 0;
-        Integer z = 0;
+///////////////////////////////commune
+        for(Commune commune : listCommune1)//converti list objet Commune en list string
+        {
+            listCommune2.add(String.valueOf(commune));
+        }
 
+        listCommune3 = listCommune2.stream()
+                .collect(Collectors.joining(","));
+
+        for(TitreCommune titreCommune : listTitreCommune1)//converti list TitreCommune titre en list string
+        {
+            listTitreCommune2.add(String.valueOf(titreCommune));
+        }
+
+        listCommuneTitre3 = listTitreCommune2.stream()
+                .collect(Collectors.joining(","));
+
+/*        System.out.println(listPays3);
+        System.out.println(listPaysTitre3);
+        System.out.println(listCommune3);
+        System.out.println(listCommuneTitre3);*/
+
+        String[] StringTitrePays1 = listPaysTitre3.split(",");
+        String[] StringPays1 = listPays3.split(",");
+        String[] StringTitreCommune1 = listCommuneTitre3.split(",");
+        String[] StringCommune1 = listCommune3.split(",");
+
+        /*System.out.println(listPays3);
+        System.out.println(listPaysTitre3);
+        System.out.println(StringCommune1[0]);
+        System.out.println(listCommuneTitre3);*/
+
+        List<Map<String, String>> listeKeyValuePays = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> listeKeyValueCommune = new ArrayList<Map<String, String>>();
+
+        Integer counterPays = 0;
+        Integer zPays = 0;
+        Integer counterCommune = 0;
+        Integer zCommune = 0;
+
+        //////////////////////////////////////////////Pays
         for(Integer i = 0 ; i < 3 ; i++)
         {
-            HashMap<String, String> map = new HashMap<String,String>();
+            HashMap<String, String> mapKeyValuePays = new HashMap<String,String>();
 
             for (Integer x = 0 ; x < 3 ; x++)
             {
-                map.put(testTitre1[z], testPays1[counter]);
+                mapKeyValuePays.put(StringTitrePays1[zPays], StringPays1[counterPays]);
 
-                counter++;
-                z++;
+                counterPays++;
+                zPays++;
 
-                if(z == 3)
+                if(zPays == 3)
                 {
-                    z = 0;
+                    zPays = 0;
                 }
 
             }
-            listeKeyValue.add(map);
+            listeKeyValuePays.add(mapKeyValuePays);
         }
 
-        System.out.println(listeKeyValue);
+        ////////////////////////////////////////////////////commune
+        for(Integer a = 0 ; a < 9 ; a++)
+        {
+            HashMap<String, String> mapKeyValueCommune = new HashMap<String,String>();
+
+            for (Integer n = 0 ; n < 3 ; n++)
+            {
+                mapKeyValueCommune.put(StringTitreCommune1[zCommune], StringCommune1[counterCommune]);
+                System.out.println(mapKeyValueCommune);
+                counterCommune++;
+                zCommune++;
+
+                if(zCommune == 3)
+                {
+                    zCommune = 0;
+                }
+            }
+            listeKeyValueCommune.add(mapKeyValueCommune);
+        }
+
+ /*       System.out.println(StringCommune1[1]);*/
+
+/*        System.out.println(listeKeyValuePays);*/
+        System.out.println(listeKeyValueCommune);
 
     }
 

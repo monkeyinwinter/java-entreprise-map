@@ -16,7 +16,7 @@ public class CommuneDao
         this.header = header;
     }
 
-    public List<TitreCommune> readTitre(String filepath) throws IOException
+    public List<TitreCommune> readTitreCommune(String filepath) throws IOException
     {
 
         String lignePropreTitre;
@@ -34,10 +34,10 @@ public class CommuneDao
 
             champsTitre = ligneTitreBrut.split(";");
 
-            id = champsTitre[0].trim();
-            String name = "," + champsTitre[1].trim();
-            String code = "," + champsTitre[2].trim();
-            TitreCommune titreCommune= new TitreCommune(id, name, code);
+            String TitreCommuneCodePostal = champsTitre[2].trim();
+            String TitreCommuneNomCommune = "," + champsTitre[1].trim();
+            String TitreCommuneGps = "," + champsTitre[5].trim();
+            TitreCommune titreCommune = new TitreCommune(TitreCommuneCodePostal, TitreCommuneNomCommune, TitreCommuneGps);
 
             listTitre.add(titreCommune);
         }
@@ -74,18 +74,14 @@ public class CommuneDao
 
             if (ligneBrutCommune2.contains(" separateur "))// pour test fichier 6
             {
-                ligneBrutCommune3 = ligneBrutCommune2.replaceAll(",", "");
+                ligneBrutCommune3 = ligneBrutCommune2.replaceAll(";", "");
 
-                lignePropreCommune = ligneBrutCommune3.replaceAll(" separateur ", ",");
+                lignePropreCommune = ligneBrutCommune3.replaceAll(" separateur ", ";");
             }
             else
             {
-                ligneBrutCommune4 = ligneBrutCommune2.replaceAll(";;", ";");
-                lignePropreCommune = ligneBrutCommune4;
-/*                lignePropreCommune = ligneBrutCommune2;*/
+                lignePropreCommune = ligneBrutCommune2.replaceAll(";;", ";");
             }
-
-/*            System.out.println(ligneBrutCommune2);*/
 
             champsCommune = lignePropreCommune.split(";");
 
@@ -97,10 +93,10 @@ public class CommuneDao
                 }
 
                 String codePostal = champsCommune[2].trim();
-                String nomCommune = champsCommune[1].trim();
-                String Gps = champsCommune[4].trim() + "/" +champsCommune[5].trim();
+                String nomCommune = "," + champsCommune[1].trim();
+                String gps = "," + champsCommune[4].trim() + "/" + champsCommune[5].trim();
 
-                Commune commune = new Commune(parseInt(codePostal), nomCommune, Gps);
+                Commune commune = new Commune(codePostal, nomCommune, gps);
 
                 ListCommune.add(commune);
             }

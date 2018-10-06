@@ -1,15 +1,15 @@
-public class Titre {
+public class TitrePays {
     private String id;
     private String name;
     private String code;
 
-    public Titre(String id, String name, String code) {//constructeur de la class pays
+    public TitrePays(String id, String name, String code) {//constructeur de la class pays
         setName(name);
         setId(id);
         setCode(code);
     }
 
-    public Titre() {//constructeur de la class pays
+    public TitrePays() {//constructeur de la class pays
 
     }
 

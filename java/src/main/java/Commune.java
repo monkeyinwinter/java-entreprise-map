@@ -1,10 +1,10 @@
 public class Commune
 {
-    private Integer codePostal;
+    private String codePostal;
     private String nomCommune;
     private String Gps;
 
-    public Commune(Integer codePostal, String nomCommune, String Gps) {//constructeur de la class pays
+    public Commune(String codePostal, String nomCommune, String Gps) {//constructeur de la class pays
         setCodePostal(codePostal);
         setCommune(nomCommune);
         setGps(Gps);
@@ -13,11 +13,11 @@ public class Commune
     public Commune() {//constructeur de la class Commune
     }
 
-    public void setCodePostal(Integer codePostal) {//setter codePostal
+    public void setCodePostal(String codePostal) {//setter codePostal
         this.codePostal = codePostal;
     }
-    public int getCodePostal() {// getter codePostal
-        return this.codePostal.intValue();
+    public String getCodePostal() {// getter codePostal
+        return this.codePostal;
     }
 
     public void setCommune(String Commune) {//setter Commune

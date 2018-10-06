@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
@@ -17,7 +16,7 @@ public class PaysDao
          this.header = header;
     }
 
-    public List<Titre> readTitre(String filepath) throws IOException
+    public List<TitrePays> readTitre(String filepath) throws IOException
     {
 
         String lignePropreTitre;
@@ -27,7 +26,7 @@ public class PaysDao
 
         List<String> lignes = Files.readAllLines(path);
 
-        List<Titre> listTitre = new ArrayList<Titre>();
+        List<TitrePays> listTitre = new ArrayList<TitrePays>();
 
         for ( Integer z = 0 ; z < 1 ; z++)
         {
@@ -38,7 +37,7 @@ public class PaysDao
             id = champsTitre[0].trim();
             String name = "," + champsTitre[1].trim();
             String code = "," + champsTitre[2].trim();
-            Titre titre= new Titre(id, name, code);
+            TitrePays titre= new TitrePays(id, name, code);
 
             listTitre.add(titre);
         }
