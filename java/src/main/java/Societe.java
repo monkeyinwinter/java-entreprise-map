@@ -2,12 +2,12 @@ public class Societe {
 
     private String societe;
     private String commune;
-    private String adresse;
+    private String[] adresse;
     private String codePostal;
     private String activite;
-    private String gps;
+    private String[] gps;
 
-    public Societe(String societe, String commune, String adresse, String codePostal, String activite, String gps) {//constructeur de la class pays
+    public Societe(String societe, String commune, String[] adresse, String codePostal, String activite, String[] gps) {//constructeur de la class pays
         setSociete(societe);
         setCommune(commune);
         setAdresse(adresse);
@@ -33,10 +33,10 @@ public class Societe {
         return this.commune;
     }
 
-    public void setAdresse(String adresse) {//setter adresse
+    public void setAdresse(String[] adresse) {//setter adresse
         this.adresse = adresse;
     }
-    public String getAdresse() {// getter adresse
+    public String[] getAdresse() {// getter adresse
         return this.adresse;
     }
 
@@ -54,21 +54,21 @@ public class Societe {
         return this.activite;
     }
 
-    public void setGps(String gps) {//setter codePostal
+    public void setGps(String[] gps) {//setter codePostal
         this.gps = gps;
     }
-    public String getGps() {// getter codePostal
+    public String[] getGps() {// getter codePostal
         return this.gps;
     }
 
     @Override
     public String toString() {
-        return  getSociete() +
-                getCommune() +
-                getAdresse() +
-                getCodePostal() +
-                getActivite() +
-                getGps();
+        return  getSociete() + "," +
+                getAdresse()[0] + " " + getAdresse()[1] + " " + getAdresse()[2] + "," +
+                getCodePostal() + "," +
+                getCommune() + "," +
+                getActivite() + "," +
+                getGps()[0]+ "/" + getGps()[1];
     }
 
 

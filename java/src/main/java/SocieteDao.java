@@ -4,8 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SocieteDao {
@@ -27,30 +26,31 @@ public class SocieteDao {
 
             String lignes = "";
 
-            while ((lignes = br.readLine()) != null ) {
+
+                lignes = br.readLine();
+
+/*            while ((lignes = br.readLine()) != null ) {*/
 /*                System.out.println(lignes);*/
 
-                for(Integer i = 0 ; i < 50 ; i++) {
 
-                    String[] champsTitre = lignes.split(";");
+            String[] champsTitre = lignes.split(";");
 
+            TitreSociete titreSociete = new TitreSociete();
 
-                TitreSociete titreSociete = new TitreSociete();
+            titreSociete.setTitreSociete(champsTitre[2].trim());
+            titreSociete.setTitreCommune("," + champsTitre[28].trim());
+            titreSociete.setTitreAdresse("," + champsTitre[17].trim() + " " + champsTitre[18].trim() + " " + champsTitre[19].trim());
+            titreSociete.setTitreCodePostal("," + champsTitre[20].trim());
+            titreSociete.setTitreActivite("," + champsTitre[43].trim());
 
-                titreSociete.setTitreCommune(champsTitre[1].trim());
-                titreSociete.setTitreAdresse(champsTitre[5].trim());
-                titreSociete.setTitreCodePostal( champsTitre[2].trim());
-                titreSociete.setTitreActivite(champsTitre[1].trim());
-                titreSociete.setTitreGps(champsTitre[5].trim());
+            listTitre.add(titreSociete);
 
-                listTitre.add(titreSociete);
+/*                }*/
 
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(listTitre);
+/*        System.out.println(listTitre);*/
         return listTitre;
     }
 /*
@@ -117,5 +117,72 @@ public class SocieteDao {
 
         return ListSociete;
     }*/
+
+
+    public List<Map<String, String>> readBuffered(String filepath, Map<String, String[]> resultCommune)
+    {
+        List<Map<String, String>> listTitre = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+
+            String ligne = null;
+
+            if (this.header == true)
+            {
+                br.readLine();
+            }
+
+            while ((ligne = br.readLine()) != null) {
+
+                Map<String, String> mapKeyValueSociete = new HashMap<String, String>();
+
+                String[] champs = ligne.split(";");
+
+/*                System.out.println(resultCommune);*/
+
+/*                resultCommune = resultCommune.split(",");*/
+
+/*                String value = null;
+                String value2 = null;*/
+
+                /*for(final Map.Entry<String, String> entry : resultCommune..entrySet()) {
+                    final String key =  entry.getKey();
+                    final String value =  entry.getValue();
+
+                }*/
+/*                System.out.println(value.split(","));*/
+
+
+
+              /*  Societe societe = new Societe();
+                societe.setSociete(champs[2].trim());
+                societe.setCommune(champs[28].trim());
+                societe.setAdresse(new String[]{champs[17].trim() , champs[18].trim() , champs[19].trim()});
+                societe.setCodePostal(champs[20].trim());
+                societe.setActivite(champs[43].trim());
+                societe.setGps(resultCommune.get(societe.getCodePostal()));*/
+
+                String[] gps = resultCommune.get(champs[20].trim());
+
+                if(gps == null)
+                {
+                    continue;
+                }
+
+                mapKeyValueSociete.put("nom", champs[2].trim());
+                mapKeyValueSociete.put("commune", champs[28].trim());
+                mapKeyValueSociete.put("codepostal", champs[20].trim());
+                mapKeyValueSociete.put("Activite", champs[43].trim());
+                mapKeyValueSociete.put("gps", gps[0] + "/" + gps[1]);
+
+                listTitre.add(mapKeyValueSociete);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listTitre;
+    }
+
 }
 

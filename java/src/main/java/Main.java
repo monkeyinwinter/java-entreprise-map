@@ -10,6 +10,14 @@ public class Main
     public static void main(String[] args) throws IOException
     {
 
+        CommuneDao dao = new CommuneDao(true);
+        Map<String, String[]> resultCommune = dao.readBuffered("data/commune.csv");
+        System.out.println(resultCommune);
+
+        SocieteDao societeDao = new SocieteDao(true);
+        List<Map<String, String>> resultSociete = societeDao.readBuffered("data/societe2.csv", resultCommune);
+        System.out.println(resultSociete);
+
         PaysDao paysDao = new PaysDao(true);
         PaysDao paysDaoTitre = new PaysDao(true);
         CommuneDao communeDao = new CommuneDao(true);
@@ -19,8 +27,8 @@ public class Main
 
         List<Pays> listPays1 = paysDao.read("data/country4.csv");
         List<TitrePays> listPaysTitre1 = paysDaoTitre.readTitre("data/country4.csv");
-        List<Commune> listCommune1 = communeDao.read("data/commune.csv");
-        List<TitreCommune> listTitreCommune1 = communeDaoTitre.readTitreCommune("data/commune.csv");
+/*        List<Commune> listCommune1 = communeDao.read("data/commune.csv");
+        List<TitreCommune> listTitreCommune1 = communeDaoTitre.readTitreCommune("data/commune.csv");*/
 /*        List<Societe> listSociete1 = SocieteDao.read("data/societe.csv");*/
         List<TitreSociete> listSocieteTitre1 = SocieteDaoTitre.readTitreSociete("data/societe.csv");
 
@@ -63,21 +71,21 @@ public class Main
                 .collect(Collectors.joining(","));
 
 ///////////////////////////////commune
-        for(Commune commune : listCommune1)//converti list objet Commune en list string
+/*        for(Commune commune : listCommune1)//converti list objet Commune en list string
         {
             listCommune2.add(String.valueOf(commune));
         }
 
         listCommune3 = listCommune2.stream()
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(","));*/
 
-        for(TitreCommune titreCommune : listTitreCommune1)//converti list TitreCommune titre en list string
+/*        for(TitreCommune titreCommune : listTitreCommune1)//converti list TitreCommune titre en list string
         {
             listTitreCommune2.add(String.valueOf(titreCommune));
         }
 
         listCommuneTitre3 = listTitreCommune2.stream()
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(","));*/
 
 /*        System.out.println(listPays3);
         System.out.println(listPaysTitre3);
@@ -86,8 +94,8 @@ public class Main
 
         String[] StringTitrePays1 = listPaysTitre3.split(",");
         String[] StringPays1 = listPays3.split(",");
-        String[] StringTitreCommune1 = listCommuneTitre3.split(",");
-        String[] StringCommune1 = listCommune3.split(",");
+/*        String[] StringTitreCommune1 = listCommuneTitre3.split(",");
+        String[] StringCommune1 = listCommune3.split(",");*/
 
         /*System.out.println(listPays3);
         System.out.println(listPaysTitre3);
@@ -124,14 +132,14 @@ public class Main
         }
 
         ////////////////////////////////////////////////////commune
-        for(Integer a = 0 ; a < 9 ; a++)
+/*        for(Integer a = 0 ; a < 9 ; a++)
         {
             HashMap<String, String> mapKeyValueCommune = new HashMap<String,String>();
 
             for (Integer n = 0 ; n < 3 ; n++)
             {
                 mapKeyValueCommune.put(StringTitreCommune1[zCommune], StringCommune1[counterCommune]);
-/*                System.out.println(mapKeyValueCommune);*/
+*//*                System.out.println(mapKeyValueCommune);*//*
                 counterCommune++;
                 zCommune++;
 
@@ -141,12 +149,37 @@ public class Main
                 }
             }
             listeKeyValueCommune.add(mapKeyValueCommune);
-        }
+        }*/
+
+/*        System.out.println(StringCommune1[0]);*/
+
+/*        for(Integer a = 0 ; a < 9 ; a++)
+        {
+            HashMap<String, String> mapKeyValueCommune = new HashMap<String,String>();
+
+            //for (Integer n = 0 ; n < 3 ; n++)
+            //{
+                mapKeyValueCommune.put(StringCommune1[0], StringCommune1[0] + "," + StringCommune1[1] + "," + StringCommune1[2]);
+                *//*                System.out.println(mapKeyValueCommune);*//*
+                counterCommune++;
+                zCommune++;
+
+                if(zCommune == 3)
+                {
+                    zCommune = 0;
+                }
+            //}
+            listeKeyValueCommune.add(mapKeyValueCommune);
+        }*/
+
 
  /*       System.out.println(StringCommune1[1]);*/
 
-/*        System.out.println(listeKeyValuePays);
-        System.out.println(listeKeyValueCommune);*/
+/*        System.out.println(listeKeyValuePays);*/
+/*        System.out.println(listeKeyValueCommune);*/
+
+
+
 
     }
 

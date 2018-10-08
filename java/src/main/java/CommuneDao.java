@@ -1,9 +1,13 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
@@ -16,7 +20,7 @@ public class CommuneDao
         this.header = header;
     }
 
-    public List<TitreCommune> readTitreCommune(String filepath) throws IOException
+/*    public List<TitreCommune> readTitreCommune(String filepath) throws IOException
     {
 
         String lignePropreTitre;
@@ -24,19 +28,18 @@ public class CommuneDao
         String id;
         Path path = Paths.get(filepath);
 
-/*        System.out.println(filepath);
+*//*        System.out.println(filepath);
 
-        System.out.println("tata" + path);*/
+        System.out.println("tata" + path);*//*
 
         List<String> lignes = Files.readAllLines(path);
 
-/*        System.out.println(lignes);*/
+*//*        System.out.println(lignes);*//*
 
         List<TitreCommune> listTitre = new ArrayList<TitreCommune>();
 
-        for ( Integer z = 0 ; z < 1 ; z++)
-        {
-            String ligneTitreBrut = lignes.get(z);
+
+            String ligneTitreBrut = lignes.get(0);
 
             champsTitre = ligneTitreBrut.split(";");
 
@@ -44,14 +47,13 @@ public class CommuneDao
             String TitreCommuneNomCommune = "," + champsTitre[1].trim();
             String TitreCommuneGps = "," + champsTitre[5].trim();
             TitreCommune titreCommune = new TitreCommune(TitreCommuneCodePostal, TitreCommuneNomCommune, TitreCommuneGps);
-/*            System.out.println(titreCommune);*/
+
             listTitre.add(titreCommune);
-        }
 
         return listTitre;
-    }
+    }*/
 
-    public List<Commune> read(String filepath) throws IOException
+/*    public List<Commune> read(String filepath) throws IOException
     {
         Path path = Paths.get(filepath);
 
@@ -110,5 +112,43 @@ public class CommuneDao
         }
 
         return ListCommune;
+    }*/
+
+    public Map<String, String[]> readBuffered(String filepath) throws IOException
+    {
+        Map<String, String[]> mapKeyValueCommune = new HashMap<String, String[]>();
+        //List<Map<String, String>> listTitre = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+
+            String ligne = null;
+
+            if (this.header == true)
+            {
+                br.readLine();
+            }
+
+            while ((ligne = br.readLine()) != null) {
+
+
+                String[] champs = ligne.replaceAll(";;", ";").split(";");
+
+                Commune commune = new Commune();
+
+                commune.setCodePostal(champs[2].trim());
+                commune.setCommune(champs[1].trim());
+                commune.setGps(new String[]{champs[4].trim(), champs[5].trim()});
+
+                mapKeyValueCommune.put(commune.getCodePostal(), commune.getGps());
+
+                //listTitre.add(mapKeyValueCommune);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mapKeyValueCommune;
     }
+
+
 }

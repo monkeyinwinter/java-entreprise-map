@@ -1,4 +1,4 @@
-/*
+
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,9 +14,9 @@ public class PaysDaoTest {
         List<Pays> mylist = dao.read("data/country1.csv");
 
         assertThat(mylist.size()).isEqualTo(3);
-        assertThat(mylist.get(0).getId()).isEqualTo(1);
-        assertThat(mylist.get(0).getName()).isEqualTo("France");
-        assertThat(mylist.get(0).getCode()).isEqualTo("FR");
+        assertThat(mylist.get(0).getId()).isEqualTo("1");
+        assertThat(mylist.get(0).getName()).isEqualTo(",France");
+        assertThat(mylist.get(0).getCode()).isEqualTo(",FR");
 
     }
 
@@ -28,9 +28,9 @@ public class PaysDaoTest {
         List<Pays> mylist = dao.read("data/country2.csv");
 
         assertThat(mylist.size()).isEqualTo(3);
-        assertThat(mylist.get(0).getId()).isEqualTo(1);
-        assertThat(mylist.get(0).getName()).isEqualTo("France");
-        assertThat(mylist.get(0).getCode()).isEqualTo("FR");
+        assertThat(mylist.get(0).getId()).isEqualTo("1");
+        assertThat(mylist.get(0).getName()).isEqualTo(",France");
+        assertThat(mylist.get(0).getCode()).isEqualTo(",FR");
     }
 
     @Test
@@ -41,9 +41,9 @@ public class PaysDaoTest {
         List<Pays> mylist = dao.read("data/country3.csv");
 
         assertThat(mylist.size()).isEqualTo(3);
-        assertThat(mylist.get(0).getId()).isEqualTo(1);
-        assertThat(mylist.get(0).getName()).isEqualTo("France");
-        assertThat(mylist.get(0).getCode()).isEqualTo("FR");
+        assertThat(mylist.get(0).getId()).isEqualTo("1");
+        assertThat(mylist.get(0).getName()).isEqualTo(",France");
+        assertThat(mylist.get(0).getCode()).isEqualTo(",FR");
     }
 
     @Test
@@ -54,9 +54,9 @@ public class PaysDaoTest {
         List<Pays> mylist = dao.read("data/country4.csv");
 
         assertThat(mylist.size()).isEqualTo(3);
-        assertThat(mylist.get(0).getId()).isEqualTo(1);
-        assertThat(mylist.get(0).getName()).isEqualTo("France");
-        assertThat(mylist.get(0).getCode()).isEqualTo("FR");
+        assertThat(mylist.get(0).getId()).isEqualTo("1");
+        assertThat(mylist.get(0).getName()).isEqualTo(",France");
+        assertThat(mylist.get(0).getCode()).isEqualTo(",FR");
     }
 
     @Test
@@ -67,9 +67,9 @@ public class PaysDaoTest {
         List<Pays> mylist = dao.read("data/country5.csv");
 
         assertThat(mylist.size()).isEqualTo(3);
-        assertThat(mylist.get(0).getId()).isEqualTo(1);
-        assertThat(mylist.get(0).getName()).isEqualTo("France");
-        assertThat(mylist.get(0).getCode()).isEqualTo("FR");
+        assertThat(mylist.get(0).getId()).isEqualTo("1");
+        assertThat(mylist.get(0).getName()).isEqualTo(",France");
+        assertThat(mylist.get(0).getCode()).isEqualTo(",FR");
     }
 
     @Test
@@ -80,10 +80,10 @@ public class PaysDaoTest {
         List<Pays> mylist = dao.read("data/country6.csv");
 
         assertThat(mylist.size()).isEqualTo(mylist.size());
-        assertThat(mylist.get(0).getId()).isEqualTo(1);
-        assertThat(mylist.get(0).getName()).isEqualTo("France");
-        assertThat(mylist.get(0).getCode()).isEqualTo("FR");
+        assertThat(mylist.get(0).getId()).isEqualTo("1");
+        assertThat(mylist.get(0).getName()).isEqualTo(",France");
+        assertThat(mylist.get(0).getCode()).isEqualTo(",FR");
     }
 
 }
-*/
+

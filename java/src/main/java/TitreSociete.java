@@ -5,15 +5,13 @@ public class TitreSociete {
     private String TitreAdresse;
     private String TitreCodePostal;
     private String TitreActivite;
-    private String TitreGps;
 
-    public TitreSociete(String TitreSociete, String TitreCommune, String TitreAdresse, String TitreCodePostal, String TitreActivite, String TitreGps) {//constructeur de la class pays
+    public TitreSociete(String TitreSociete, String TitreCommune, String TitreAdresse, String TitreCodePostal, String TitreActivite) {//constructeur de la class pays
         setTitreSociete(TitreSociete);
         setTitreCommune(TitreCommune);
         setTitreAdresse(TitreAdresse);
         setTitreCodePostal(TitreCodePostal);
         setTitreActivite(TitreActivite);
-        setTitreGps(TitreGps);
     }
 
     public TitreSociete() {//constructeur de la class Societe
@@ -54,12 +52,6 @@ public class TitreSociete {
         return this.TitreActivite;
     }
 
-    public void setTitreGps(String TitreGps) {//setter codePostal
-        this.TitreGps = TitreGps;
-    }
-    public String getTitreGps() {// getter codePostal
-        return this.TitreGps;
-    }
 
     @Override
     public String toString() {
@@ -67,7 +59,6 @@ public class TitreSociete {
                 getTitreCommune() +
                 getTitreAdresse() +
                 getlTitreCodePostal() +
-                getTitreActivite() +
-                getTitreGps();
+                getTitreActivite();
     }
 }
