@@ -14,28 +14,36 @@ public class Main
         PaysDao paysDaoTitre = new PaysDao(true);
         CommuneDao communeDao = new CommuneDao(true);
         CommuneDao communeDaoTitre = new CommuneDao(true);
-
+/*        SocieteDao SocieteDao = new SocieteDao(true);*/
+        SocieteDao SocieteDaoTitre = new SocieteDao(true);
 
         List<Pays> listPays1 = paysDao.read("data/country4.csv");
         List<TitrePays> listPaysTitre1 = paysDaoTitre.readTitre("data/country4.csv");
         List<Commune> listCommune1 = communeDao.read("data/commune.csv");
         List<TitreCommune> listTitreCommune1 = communeDaoTitre.readTitreCommune("data/commune.csv");
-
+/*        List<Societe> listSociete1 = SocieteDao.read("data/societe.csv");*/
+        List<TitreSociete> listSocieteTitre1 = SocieteDaoTitre.readTitreSociete("data/societe.csv");
 
         List<String> listPays2 = new ArrayList<String>();
         List<String> listPaysTitre2 = new ArrayList<String>();
         List<String> listCommune2 = new ArrayList<String>();
         List<String> listTitreCommune2 = new ArrayList<String>();
+        List<String> listSociete2 = new ArrayList<String>();
+        List<String> listTitreSociete2 = new ArrayList<String>();
 
 /*        System.out.println(listPays1);
         System.out.println(listPaysTitre1);
         System.out.println(listCommune1);
-        System.out.println(listTitreCommune1);*/
+        System.out.println(listTitreCommune1);
+        System.out.println(listSociete1);*/
+/*       System.out.println(listSocieteTitre1);*/
 
         String listPays3;
         String listPaysTitre3;
         String listCommune3;
         String listCommuneTitre3;
+        String listSociete3;
+        String listSocieteTitre3;
 
 ///////////////////////////////Pays
         for(Pays pays : listPays1)//converti list objet pays en list string
@@ -123,7 +131,7 @@ public class Main
             for (Integer n = 0 ; n < 3 ; n++)
             {
                 mapKeyValueCommune.put(StringTitreCommune1[zCommune], StringCommune1[counterCommune]);
-                System.out.println(mapKeyValueCommune);
+/*                System.out.println(mapKeyValueCommune);*/
                 counterCommune++;
                 zCommune++;
 
@@ -137,8 +145,8 @@ public class Main
 
  /*       System.out.println(StringCommune1[1]);*/
 
-/*        System.out.println(listeKeyValuePays);*/
-        System.out.println(listeKeyValueCommune);
+/*        System.out.println(listeKeyValuePays);
+        System.out.println(listeKeyValueCommune);*/
 
     }
 

@@ -1,14 +1,14 @@
 public class Societe {
 
-    private String Societe;
+    private String societe;
     private String commune;
     private String adresse;
-    private Integer codePostal;
+    private String codePostal;
     private String activite;
     private String gps;
 
-    public Societe(String Societe, String commune, String adresse, Integer codePostal, String activite, String gps) {//constructeur de la class pays
-        setSociete(Societe);
+    public Societe(String societe, String commune, String adresse, String codePostal, String activite, String gps) {//constructeur de la class pays
+        setSociete(societe);
         setCommune(commune);
         setAdresse(adresse);
         setCodePostal(codePostal);
@@ -19,11 +19,11 @@ public class Societe {
     public Societe() {//constructeur de la class Societe
     }
 
-    public void setSociete(String Societe) {//setter Societe
-        this.Societe = Societe;
+    public void setSociete(String societe) {//setter Societe
+        this.societe = societe;
     }
     public String getSociete() {// getter Societe
-        return this.Societe;
+        return this.societe;
     }
 
     public void setCommune(String commune) {//setter commune
@@ -40,10 +40,10 @@ public class Societe {
         return this.adresse;
     }
 
-    public void setCodePostal(Integer codePostal) {//setter codePostal
+    public void setCodePostal(String codePostal) {//setter codePostal
         this.codePostal = codePostal;
     }
-    public Integer getCodePostal() {// getter codePostal
+    public String getCodePostal() {// getter codePostal
         return this.codePostal;
     }
 
@@ -63,12 +63,12 @@ public class Societe {
 
     @Override
     public String toString() {
-        return "Societe -> " + getSociete()
-                + "Commune -> " + getCommune()
-                + "Adresse -> " + getAdresse()
-                + "code postal -> " + getCodePostal()
-                + "Activite -> " + getActivite()
-                + "Gps -> " + getGps();
+        return  getSociete() +
+                getCommune() +
+                getAdresse() +
+                getCodePostal() +
+                getActivite() +
+                getGps();
     }
 
 

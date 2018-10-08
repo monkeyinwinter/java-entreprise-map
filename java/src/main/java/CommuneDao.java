@@ -24,7 +24,13 @@ public class CommuneDao
         String id;
         Path path = Paths.get(filepath);
 
+/*        System.out.println(filepath);
+
+        System.out.println("tata" + path);*/
+
         List<String> lignes = Files.readAllLines(path);
+
+/*        System.out.println(lignes);*/
 
         List<TitreCommune> listTitre = new ArrayList<TitreCommune>();
 
@@ -38,7 +44,7 @@ public class CommuneDao
             String TitreCommuneNomCommune = "," + champsTitre[1].trim();
             String TitreCommuneGps = "," + champsTitre[5].trim();
             TitreCommune titreCommune = new TitreCommune(TitreCommuneCodePostal, TitreCommuneNomCommune, TitreCommuneGps);
-
+/*            System.out.println(titreCommune);*/
             listTitre.add(titreCommune);
         }
 
