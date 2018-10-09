@@ -1,74 +1,74 @@
 public class Societe {
 
-    private String societe;
-    private String commune;
-    private String[] adresse;
-    private String codePostal;
-    private String activite;
-    private String[] gps;
+    private String name;
+    private String city;
+    private String[] adress;
+    private String postcode;
+    private String sector;
+    private float[] coord;
 
-    public Societe(String societe, String commune, String[] adresse, String codePostal, String activite, String[] gps) {//constructeur de la class pays
-        setSociete(societe);
-        setCommune(commune);
-        setAdresse(adresse);
-        setCodePostal(codePostal);
-        setActivite(activite);
-        setGps(gps);
+    public Societe(String name, String city, String[] adress, String postcode, String sector, float[] coord) {//constructeur de la class pays
+        setName(name);
+        setCity(city);
+        setAdress(adress);
+        setPostcode(postcode);
+        setSector(sector);
+        setCoord(coord);
     }
 
     public Societe() {//constructeur de la class Societe
     }
 
-    public void setSociete(String societe) {//setter Societe
-        this.societe = societe;
+    public void setName(String name) {//setter Societe
+        this.name = name;
     }
-    public String getSociete() {// getter Societe
-        return this.societe;
-    }
-
-    public void setCommune(String commune) {//setter commune
-        this.commune = commune;
-    }
-    public String getCommune() {// getter commune
-        return this.commune;
+    public String getName() {// getter Societe
+        return this.name;
     }
 
-    public void setAdresse(String[] adresse) {//setter adresse
-        this.adresse = adresse;
+    public void setCity(String city) {//setter commune
+        this.city = city;
     }
-    public String[] getAdresse() {// getter adresse
-        return this.adresse;
-    }
-
-    public void setCodePostal(String codePostal) {//setter codePostal
-        this.codePostal = codePostal;
-    }
-    public String getCodePostal() {// getter codePostal
-        return this.codePostal;
+    public String getCity() {// getter commune
+        return this.city;
     }
 
-    public void setActivite(String activite) {//setter codePostal
-        this.activite = activite;
+    public void setAdress(String[] adress) {//setter adresse
+        this.adress = adress;
     }
-    public String getActivite() {// getter codePostal
-        return this.activite;
+    public String[] getAdress() {// getter adresse
+        return this.adress;
     }
 
-    public void setGps(String[] gps) {//setter codePostal
-        this.gps = gps;
+    public void setPostcode(String postcode) {//setter codePostal
+        this.postcode = postcode;
     }
-    public String[] getGps() {// getter codePostal
-        return this.gps;
+    public String getPostcode() {// getter codePostal
+        return this.postcode;
+    }
+
+    public void setSector(String sector) {//setter codePostal
+        this.sector = sector;
+    }
+    public String getSector() {// getter codePostal
+        return this.sector;
+    }
+
+    public void setCoord(float[] coord) {//setter codePostal
+        this.coord = coord;
+    }
+    public float[] getCoord() {// getter codePostal
+        return this.coord;
     }
 
     @Override
     public String toString() {
-        return  getSociete() + "," +
-                getAdresse()[0] + " " + getAdresse()[1] + " " + getAdresse()[2] + "," +
-                getCodePostal() + "," +
-                getCommune() + "," +
-                getActivite() + "," +
-                getGps()[0]+ "/" + getGps()[1];
+        return  getName() + "," +
+                getAdress()[0] + " " + getAdress()[1] + " " + getAdress()[2] + "," +
+                getPostcode() + "," +
+                getCity() + "," +
+                getSector() + "," +
+                getCoord()[0]+ "," + getCoord()[1];
     }
 
 
