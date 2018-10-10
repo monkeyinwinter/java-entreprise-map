@@ -9,9 +9,7 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
-
-
-        Scanner entréeClavier = new Scanner(System.in);
+/*        Scanner entréeClavier = new Scanner(System.in);
 
         System.out.println("Veuillez saisir un chiffre superieur ou inférieur à 5 :");
 
@@ -43,7 +41,7 @@ public class Main
 
         Integer nbApVirg = 2;//arrondir à deux chiffres après la virgule
 
-        double resultArrondi = arrondir(result, nbApVirg );
+        double resultArrondi = arrondir(result, nbApVirg );// la method se trouve en bas du main !!
 
         if (result < 100)
         {
@@ -51,7 +49,9 @@ public class Main
         }else
         {
             System.out.print("Distance : " + villeSource + " / " + villeDestination + " = " + resultArrondi + " km de distance est trop loin");
-        }
+        }*/
+
+
 
 
 
@@ -149,7 +149,7 @@ public class Main
 
     }
 
-    public static double distance_Between_LatLong(double lat1, double lon1, double lat2, double lon2) {
+/*    public static double distance_Between_LatLong(double lat1, double lon1, double lat2, double lon2) {
         lat1 = Math.toRadians(lat1);
         lon1 = Math.toRadians(lon1);
         lat2 = Math.toRadians(lat2);
@@ -162,7 +162,7 @@ public class Main
     public static double arrondir(double nombre,double nbApVirg)
     {
         return(double)((int)(nombre * Math.pow(10,nbApVirg) + .5)) / Math.pow(10,nbApVirg);
-    }
+    }*/
 
 }
 
