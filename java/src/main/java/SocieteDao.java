@@ -105,88 +105,56 @@ public class SocieteDao {
     }
 
 
-    public List<Map<String, Object>> listSector(String filepath, List<Map<String, Object>> resultSociete)
+    public List<Map<String, Object>> listSector(List<Map<String, Object>> resultSociete)
     {
         List<Map<String, Object>> list = new ArrayList<>();
 
-        try
+        Integer count = 1;
+
+        for (Map<String, Object> resultSociete2 : resultSociete)
         {
-            BufferedReader bfr = new BufferedReader (new FileReader (filepath));
+            Map<String, Object> mapKeyValueSectorIN = new HashMap<String, Object>();
+            Map<String, Object> mapKeyValueSectorOut = new HashMap<String, Object>();
 
-            String line;
-
-            Map maMap = new HashMap();
-
-            Integer Mot = new Integer(1);
-
-            while ((line = bfr.readLine())!= null)
+            for (Map.Entry<String, Object> resultSociete3 : resultSociete2.entrySet())
             {
-                String [] tokens = line.split("," );
-                int i = 0;
+                String sector = resultSociete3.getKey();
+                Object value = resultSociete3.getValue();
 
-                System.out.println(tokens[3]);
+                String valueConvert = String.valueOf(value);
 
-                String[] test = tokens[3].split(":");
 
-                String newtest = test[0].replace("\"", "");
-
-                System.out.println(newtest);
-
-                while (tokens.length > i)
-                {
-                    String Word = tokens[i++];
-                    Word = Word.toLowerCase();
-                    Word = Word.replaceAll("[^a-z]","" );
-
-                    if(Word.length()>2)
-                    {
-                        if (maMap.containsKey(Word)== false )
-                        {
-                            maMap.put(Word, Mot);
-                        }
-                        else
-                        {
-                            String nombre_key = maMap.get(Word).toString();
-                            Integer MotStoke = new Integer(nombre_key);
-                            int temp = Mot.intValue()+ MotStoke.intValue();
-                            Integer nbMot = new Integer (temp);
-                            Mot.toString();
-                            maMap.remove(Word);
-                            maMap.put(Word, nbMot);
-                        }
-                    }
-                }
-            }
-/*            System.out.println(maMap);*/
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-
-/*   for (Map<String, Object> featureService : resultSociete)
-        {
-            Map<String, Object> mapKeyValueSector = new HashMap<String, Object>();
-
-            for (Map.Entry<String, Object> entry : featureService.entrySet())
-            {
-                String sector = entry.getKey();
-                Object value = entry.getValue();
-
-                String valueConvertedToString = String.valueOf(value);
 
                 if (sector.equals("sector"))
                 {
-*//*                    count++;
-                    mapKeyValueSector.put(sector, value);
-                    mapKeyValueSector.put("value", count);
+/*                    System.out.println(valueConvert);*/
 
-                    list.add(mapKeyValueSector);*//*
+                    mapKeyValueSectorIN.put(valueConvert, "");
+                    mapKeyValueSectorIN.put("value", count);
+
+                    System.out.println(mapKeyValueSectorOut);
+
+                    boolean test = mapKeyValueSectorOut.containsKey(valueConvert);
+/*                    System.out.println(valueConvert);
+                    System.out.println(test);*/
+
+                    if(test == true)
+                    {
+                        continue;
+                    }else
+                    {
+                        mapKeyValueSectorOut.put("sector", value );
+                        mapKeyValueSectorOut.put("value", count++ );
+                        list.add(mapKeyValueSectorOut);
+
+                        System.out.println(mapKeyValueSectorOut);
+
+                    }
                 }
             }
-        }*/
 
-
-
+        }
+       /* System.out.println(list);*/
         return list;
     }
 }

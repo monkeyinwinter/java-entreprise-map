@@ -19,8 +19,8 @@ public class Main
 /*        System.out.println(resultSociete);*/
 
         SocieteDao societeDaoList = new SocieteDao(true);
-        List<Map<String, Object>> resultListSector = societeDaoList.listSector("../data/data-map.json", resultSociete);
-        System.out.println(resultListSector);
+        List<Map<String, Object>> resultListSector = societeDaoList.listSector(resultSociete);
+/*        System.out.println(resultListSector);*/
 
         Gson gson = new Gson();//converti list map string string en json
         String resultSocieteJson = gson.toJson(resultSociete);
