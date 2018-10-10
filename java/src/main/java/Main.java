@@ -2,16 +2,60 @@ import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main
 {
     public static void main(String[] args) throws IOException
     {
+
+
+        Scanner entréeClavier = new Scanner(System.in);
+
+        System.out.println("Veuillez saisir un chiffre superieur ou inférieur à 5 :");
+
+        Integer resultEntréeClavier = entréeClavier.nextInt();
+
+        double latDestination;
+        double lonDestination;
+        String villeDestination;
+
+        if(resultEntréeClavier < 5)
+        {
+            latDestination = 44.9;//le cheylard
+            lonDestination = 4.4167;
+            villeDestination = "Le Cheylard";
+        }else
+        {
+            latDestination = 43.610769;//mtp
+            lonDestination = 3.876716;
+            villeDestination = "Montpellier";
+        }
+
+
+        double latSource = 44.933393;//valence
+        double lonSource = 4.89236;
+        String villeSource = "Valence";
+
+
+        double result = distance_Between_LatLong(latSource, lonSource, latDestination, lonDestination);
+
+        Integer nbApVirg = 2;//arrondir à deux chiffres après la virgule
+
+        double resultArrondi = arrondir(result, nbApVirg );
+
+        if (result < 100)
+        {
+            System.out.print("Distance : " + villeSource + " / " + villeDestination + " = " + resultArrondi + " km de distance est tout près");
+        }else
+        {
+            System.out.print("Distance : " + villeSource + " / " + villeDestination + " = " + resultArrondi + " km de distance est trop loin");
+        }
+
+
+
+
 
         CommuneDao dao = new CommuneDao(true);
         Map<String, String[]> resultCommune = dao.readBuffered("data/ville.csv");
@@ -35,6 +79,8 @@ public class Main
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
 
 
@@ -95,7 +141,29 @@ public class Main
             }
             listeKeyValuePays.add(mapKeyValuePays);
         }
+
+
+
+
+
+
     }
+
+    public static double distance_Between_LatLong(double lat1, double lon1, double lat2, double lon2) {
+        lat1 = Math.toRadians(lat1);
+        lon1 = Math.toRadians(lon1);
+        lat2 = Math.toRadians(lat2);
+        lon2 = Math.toRadians(lon2);
+
+        double earthRadius = 6371.01; //Kilometers
+        return earthRadius * Math.acos(Math.sin(lat1)*Math.sin(lat2) + Math.cos(lat1)*Math.cos(lat2)*Math.cos(lon1 - lon2));
+    }
+
+    public static double arrondir(double nombre,double nbApVirg)
+    {
+        return(double)((int)(nombre * Math.pow(10,nbApVirg) + .5)) / Math.pow(10,nbApVirg);
+    }
+
 }
 
 

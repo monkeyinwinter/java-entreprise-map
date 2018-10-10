@@ -43,21 +43,19 @@ public class SocieteDao {
                     continue;
                 }
 
+                // calcul distance entre point[] et gps[]
+
+
+
+
+
                 mapKeyValueSociete.put("name", champs[2].trim());
                 mapKeyValueSociete.put("city", champs[28].trim());
                 mapKeyValueSociete.put("adress", champs[5].trim());
                 mapKeyValueSociete.put("postcode", champs[20].trim());
                 mapKeyValueSociete.put("sector", champs[43].trim());
 
-/*                try{
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-
                 mapKeyValueSociete.put("coord", new Float[] {Float.parseFloat(gps[0]), Float.parseFloat(gps[1])});
-
 
                 list.add(mapKeyValueSociete);
             }

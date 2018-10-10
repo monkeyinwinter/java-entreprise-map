@@ -7,7 +7,8 @@ public class Societe {
     private String sector;
     private float[] coord;
 
-    public Societe(String name, String city, String[] adress, String postcode, String sector, float[] coord) {//constructeur de la class pays
+    public Societe(String name, String city, String[] adress, String postcode, String sector, float[] coord)//constructeur de la class pays
+    {
         setName(name);
         setCity(city);
         setAdress(adress);
@@ -16,53 +17,67 @@ public class Societe {
         setCoord(coord);
     }
 
-    public Societe() {//constructeur de la class Societe
+    public Societe()//constructeur de la class Societe
+    {
     }
 
-    public void setName(String name) {//setter Societe
+    public void setName(String name)
+    {//setter Societe
         this.name = name;
     }
-    public String getName() {// getter Societe
+    public String getName()
+    {// getter Societe
         return this.name;
     }
 
-    public void setCity(String city) {//setter commune
+    public void setCity(String city)
+    {//setter commune
         this.city = city;
     }
-    public String getCity() {// getter commune
+    public String getCity()
+    {// getter commune
         return this.city;
     }
 
-    public void setAdress(String[] adress) {//setter adresse
+    public void setAdress(String[] adress)
+    {//setter adresse
         this.adress = adress;
     }
-    public String[] getAdress() {// getter adresse
+    public String[] getAdress()
+    {// getter adresse
         return this.adress;
     }
 
-    public void setPostcode(String postcode) {//setter codePostal
+    public void setPostcode(String postcode)
+    {//setter getPostcode
         this.postcode = postcode;
     }
-    public String getPostcode() {// getter codePostal
+    public String getPostcode()
+    {// getter getPostcode
         return this.postcode;
     }
 
-    public void setSector(String sector) {//setter codePostal
+    public void setSector(String sector)
+    {//setter setSector
         this.sector = sector;
     }
-    public String getSector() {// getter codePostal
+    public String getSector()
+    {// getter setSector
         return this.sector;
     }
 
-    public void setCoord(float[] coord) {//setter codePostal
+    public void setCoord(float[] coord)
+    {//setter setCoord
         this.coord = coord;
     }
-    public float[] getCoord() {// getter codePostal
+    public float[] getCoord()
+    {// getter setCoord
         return this.coord;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return  getName() + "," +
                 getAdress()[0] + " " + getAdress()[1] + " " + getAdress()[2] + "," +
                 getPostcode() + "," +
