@@ -9,53 +9,6 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
-/*        Scanner entréeClavier = new Scanner(System.in);
-
-        System.out.println("Veuillez saisir un chiffre superieur ou inférieur à 5 :");
-
-        Integer resultEntréeClavier = entréeClavier.nextInt();
-
-        double latDestination;
-        double lonDestination;
-        String villeDestination;
-
-        if(resultEntréeClavier < 5)
-        {
-            latDestination = 44.9;//le cheylard
-            lonDestination = 4.4167;
-            villeDestination = "Le Cheylard";
-        }else
-        {
-            latDestination = 43.610769;//mtp
-            lonDestination = 3.876716;
-            villeDestination = "Montpellier";
-        }
-
-
-        double latSource = 44.933393;//valence
-        double lonSource = 4.89236;
-        String villeSource = "Valence";
-
-
-        double result = distance_Between_LatLong(latSource, lonSource, latDestination, lonDestination);
-
-        Integer nbApVirg = 2;//arrondir à deux chiffres après la virgule
-
-        double resultArrondi = arrondir(result, nbApVirg );// la method se trouve en bas du main !!
-
-        if (result < 100)
-        {
-            System.out.print("Distance : " + villeSource + " / " + villeDestination + " = " + resultArrondi + " km de distance est tout près");
-        }else
-        {
-            System.out.print("Distance : " + villeSource + " / " + villeDestination + " = " + resultArrondi + " km de distance est trop loin");
-        }*/
-
-
-
-
-
-
 
         CommuneDao dao = new CommuneDao(true);
         Map<String, String[]> resultCommune = dao.readBuffered("data/ville.csv");
@@ -65,14 +18,22 @@ public class Main
         List<Map<String, Object>> resultSociete = societeDao.readBuffered("data/societe.csv", resultCommune);
 /*        System.out.println(resultSociete);*/
 
+        SocieteDao societeDaoList = new SocieteDao(true);
+        List<Map<String, Object>> resultListSector = societeDaoList.listSector("../data/data-map.json", resultSociete);
+        System.out.println(resultListSector);
 
         Gson gson = new Gson();//converti list map string string en json
         String resultSocieteJson = gson.toJson(resultSociete);
 /*        System.out.println(resultSocieteJson);*/
 
+
+/*        Gson gson2 = new Gson();//converti list map string string en json
+        String resultListSectorJson = gson2.toJson(resultListSector);
+        System.out.println(resultSocieteJson);*/
+
         try
         {
-            FileWriter writer = new FileWriter("../data/data-map.json");//ecrit et save un fichier convertie en json
+            FileWriter writer = new FileWriter("../data/data-map.json");//ecrit et save un fichier convertie en json pour la map
             writer.write(resultSocieteJson);
             writer.close();
 
@@ -80,7 +41,15 @@ public class Main
             e.printStackTrace();
         }
 
+/*        try
+        {
+            FileWriter writer = new FileWriter("../data/data-table.json");//ecrit et save un fichier convertie en json pour la table
+            writer.write(resultListSectorJson);
+            writer.close();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
 
 
@@ -148,21 +117,6 @@ public class Main
 
 
     }
-
-/*    public static double distance_Between_LatLong(double lat1, double lon1, double lat2, double lon2) {
-        lat1 = Math.toRadians(lat1);
-        lon1 = Math.toRadians(lon1);
-        lat2 = Math.toRadians(lat2);
-        lon2 = Math.toRadians(lon2);
-
-        double earthRadius = 6371.01; //Kilometers
-        return earthRadius * Math.acos(Math.sin(lat1)*Math.sin(lat2) + Math.cos(lat1)*Math.cos(lat2)*Math.cos(lon1 - lon2));
-    }
-
-    public static double arrondir(double nombre,double nbApVirg)
-    {
-        return(double)((int)(nombre * Math.pow(10,nbApVirg) + .5)) / Math.pow(10,nbApVirg);
-    }*/
 
 }
 
