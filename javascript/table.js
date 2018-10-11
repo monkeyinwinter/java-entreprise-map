@@ -14,8 +14,8 @@ jQuery.noConflict();
         // Add data.
         $.each(data, function(key, line) {
             tr = $('<tr>').appendTo($('#table'));
-            tr.append('<td>' + line.sector +'</td>');
-            tr.append('<td>' + line.value +'</td>');
+            tr.append('<td class="marge">' + line.sector +'</td>');
+            tr.append('<td class="marge">' + line.value +'</td>');
         });
     }
 

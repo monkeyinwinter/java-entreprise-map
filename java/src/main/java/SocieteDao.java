@@ -71,7 +71,7 @@ public class SocieteDao {
 
                 double result = distance_Between_LatLong(latSource, lonSource, LatDest, LonDest);
 
-                if (result < 150)
+                if (result < 100)
                 {
                     mapKeyValueSociete.put("name", champs[2].trim());
                     mapKeyValueSociete.put("city", champs[28].trim());
@@ -105,16 +105,18 @@ public class SocieteDao {
     }
 
 
-    public List<Map<String, Integer>> listSector(List<Map<String, Object>> resultSociete)
+    public List<Map<String, String>> listSector(List<Map<String, Object>> resultSociete)
     {
         List<Map<String, Integer>> list = new ArrayList<>();
         List<Map<String, Integer>> listTemp = new ArrayList<>();
+        List<Map<String, Integer>> listOut = new ArrayList<>();
+        List<Map<String, String>> listOutLast = new ArrayList<>();
 
         Integer count = 1;
-        Map<String, Integer> mapKeyValueSectorTemp = new HashMap<String, Integer>();
+
         for (Map<String, Object> resultSociete2 : resultSociete)
         {
-
+            Map<String, Integer> mapKeyValueSectorTemp = new HashMap<String, Integer>();
 
             for (Map.Entry<String, Object> resultSociete3 : resultSociete2.entrySet())
             {
@@ -130,25 +132,72 @@ public class SocieteDao {
             }
             listTemp.add(mapKeyValueSectorTemp);
         }
-        System.out.println(mapKeyValueSectorTemp);
 
-        boolean test = mapKeyValueSectorTemp.contains("D�pollution et autres services de gestion des d�chets");
+        Map<String, Integer> mapKeyValueSectorOut = new HashMap<String, Integer>();
 
-        /*         System.out.println(listTemp);*/
+        for ( Integer i = 0 ; i < 1 ; i++)
+        {
+            for (Map<String, Integer> listTemp2 : listTemp)
+            {
+                for (Map.Entry<String, Integer> listTemp3 : listTemp2.entrySet())
+                {
+                    String sector2 = listTemp3.getKey();
 
+                    boolean test = mapKeyValueSectorOut.containsKey(sector2);
 
+                    if (test == true)
+                    {
+                        Integer valueTemp = null;
+                        for (Map.Entry<String, Integer> entry : mapKeyValueSectorOut.entrySet())
+                        {
+                            String key = entry.getKey();
+                            valueTemp = entry.getValue();
 
+                            if (key.equals(sector2))
+                            {
+                                Integer test2 = valueTemp + 1;
+                                mapKeyValueSectorOut.put(sector2, test2);
+                            }
+                        }
 
+                        continue;
+                    }else
+                    {
+                        mapKeyValueSectorOut.put(sector2, count );
+                    }
 
-/*
-        Boolean test = listTemp.contains("Comm. d�tail de quincaillerie, peintures et verres (mag.< 400 m2)");
+                }
+            }
 
-        System.out.println(test);
-*/
+            listOut.add(mapKeyValueSectorOut);
+/*                    System.out.println(mapKeyValueSectorOut);*/
+        }
+/*        System.out.println(listOut);*/
 
+        for (Map<String, Integer> listOut2 : listOut)
+        {
+            for (Map.Entry<String, Integer> resultSociete3 : listOut2.entrySet())
+            {
+                Map<String, String> mapKeyValueSectorLast = new HashMap<String, String>();
+                String sector = resultSociete3.getKey();
+                Integer value = resultSociete3.getValue();
 
-       /* System.out.println(list);*/
-        return list;
+                String valueAsString = Integer.toString(value);
+
+                String sectorTitre = "sector";
+                String valueTitre = "value";
+
+                mapKeyValueSectorLast.put(sectorTitre, sector);
+                mapKeyValueSectorLast.put(valueTitre, valueAsString);
+
+/*                System.out.println(mapKeyValueSectorLast);*/
+                listOutLast.add(mapKeyValueSectorLast);
+            }
+
+        }
+
+/*        System.out.println(listOutLast);*/
+        return listOutLast;
     }
 }
 

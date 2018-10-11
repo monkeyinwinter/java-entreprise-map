@@ -19,7 +19,7 @@ public class Main
 /*        System.out.println(resultSociete);*/
 
         SocieteDao societeDaoList = new SocieteDao(true);
-        List<Map<String, Integer>> resultListSector = societeDaoList.listSector(resultSociete);
+        List<Map<String, String>> resultListSector = societeDaoList.listSector(resultSociete);
 /*        System.out.println(resultListSector);*/
 
         Gson gson = new Gson();//converti list map string string en json
@@ -27,9 +27,9 @@ public class Main
 /*        System.out.println(resultSocieteJson);*/
 
 
-/*        Gson gson2 = new Gson();//converti list map string string en json
+        Gson gson2 = new Gson();//converti list map string string en json
         String resultListSectorJson = gson2.toJson(resultListSector);
-        System.out.println(resultSocieteJson);*/
+/*        System.out.println(resultListSectorJson);*/
 
         try
         {
@@ -41,7 +41,7 @@ public class Main
             e.printStackTrace();
         }
 
-/*        try
+        try
         {
             FileWriter writer = new FileWriter("../data/data-table.json");//ecrit et save un fichier convertie en json pour la table
             writer.write(resultListSectorJson);
@@ -49,7 +49,7 @@ public class Main
 
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
 
