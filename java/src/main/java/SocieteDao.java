@@ -105,16 +105,16 @@ public class SocieteDao {
     }
 
 
-    public List<Map<String, Object>> listSector(List<Map<String, Object>> resultSociete)
+    public List<Map<String, Integer>> listSector(List<Map<String, Object>> resultSociete)
     {
-        List<Map<String, Object>> list = new ArrayList<>();
+        List<Map<String, Integer>> list = new ArrayList<>();
+        List<Map<String, Integer>> listTemp = new ArrayList<>();
 
         Integer count = 1;
-
+        Map<String, Integer> mapKeyValueSectorTemp = new HashMap<String, Integer>();
         for (Map<String, Object> resultSociete2 : resultSociete)
         {
-            Map<String, Object> mapKeyValueSectorIN = new HashMap<String, Object>();
-            Map<String, Object> mapKeyValueSectorOut = new HashMap<String, Object>();
+
 
             for (Map.Entry<String, Object> resultSociete3 : resultSociete2.entrySet())
             {
@@ -123,37 +123,30 @@ public class SocieteDao {
 
                 String valueConvert = String.valueOf(value);
 
-
-
                 if (sector.equals("sector"))
                 {
-/*                    System.out.println(valueConvert);*/
-
-                    mapKeyValueSectorIN.put(valueConvert, "");
-                    mapKeyValueSectorIN.put("value", count);
-
-                    System.out.println(mapKeyValueSectorOut);
-
-                    boolean test = mapKeyValueSectorOut.containsKey(valueConvert);
-/*                    System.out.println(valueConvert);
-                    System.out.println(test);*/
-
-                    if(test == true)
-                    {
-                        continue;
-                    }else
-                    {
-                        mapKeyValueSectorOut.put("sector", value );
-                        mapKeyValueSectorOut.put("value", count++ );
-                        list.add(mapKeyValueSectorOut);
-
-                        System.out.println(mapKeyValueSectorOut);
-
-                    }
+                    mapKeyValueSectorTemp.put(valueConvert, count );
                 }
             }
-
+            listTemp.add(mapKeyValueSectorTemp);
         }
+        System.out.println(mapKeyValueSectorTemp);
+
+        boolean test = mapKeyValueSectorTemp.contains("D�pollution et autres services de gestion des d�chets");
+
+        /*         System.out.println(listTemp);*/
+
+
+
+
+
+/*
+        Boolean test = listTemp.contains("Comm. d�tail de quincaillerie, peintures et verres (mag.< 400 m2)");
+
+        System.out.println(test);
+*/
+
+
        /* System.out.println(list);*/
         return list;
     }
