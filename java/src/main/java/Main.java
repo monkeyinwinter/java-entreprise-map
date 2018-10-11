@@ -2,20 +2,24 @@ import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main
 {
+
     public static void main(String[] args) throws IOException
     {
+        System.out.println("ça commence !!!");
+        long debut = System.currentTimeMillis();
 
         CommuneDao dao = new CommuneDao(true);
         Map<String, String[]> resultCommune = dao.readBuffered("data/ville.csv");
 /*        System.out.println(resultCommune);*/
 
         SocieteDao societeDao = new SocieteDao(true);
-        List<Map<String, Object>> resultSociete = societeDao.readBuffered("data/societe.csv", resultCommune);
+        List<Map<String, Object>> resultSociete = societeDao.readBuffered("data/societeTest.csv", resultCommune);
 /*        System.out.println(resultSociete);*/
 
         SocieteDao societeDaoList = new SocieteDao(true);
@@ -50,6 +54,11 @@ public class Main
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        DecimalFormat f = new DecimalFormat();
+        f.setMaximumFractionDigits(2);
+
+        System.out.println("c est fini !!! " + f.format((System.currentTimeMillis()-debut)*0.001) + " secondes");
 
 
 

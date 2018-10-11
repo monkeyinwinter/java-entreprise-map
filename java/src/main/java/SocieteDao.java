@@ -24,6 +24,7 @@ public class SocieteDao {
 
             String ligne = null;
 
+
             if (this.header == true)
             {
                 br.readLine();
@@ -33,7 +34,9 @@ public class SocieteDao {
 
                 Map<String, Object> mapKeyValueSociete = new HashMap<String, Object>();
 
-                String[] champs = ligne.split(";");
+                String lignex = ligne.replace("\"", "");
+
+                String[] champs = lignex.split(";");
 
                 String[] gps = resultCommune.get(champs[20].trim());
 
@@ -71,7 +74,7 @@ public class SocieteDao {
 
                 double result = distance_Between_LatLong(latSource, lonSource, LatDest, LonDest);
 
-                if (result < 100)
+                if (result < 10)
                 {
                     mapKeyValueSociete.put("name", champs[2].trim());
                     mapKeyValueSociete.put("city", champs[28].trim());
