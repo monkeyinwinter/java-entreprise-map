@@ -39,26 +39,6 @@ public class SocieteDao
                     continue;
                 }
 
-
-                // calcul distance entre point[] et gps[]
-                /*Scanner entréeClavier = new Scanner(System.in);
-                System.out.println("Veuillez saisir un chiffre superieur ou inférieur à 100 :");
-                Integer resultEntréeClavier = entréeClavier.nextInt();
-                double latDestination;
-                double lonDestination;
-                if(resultEntréeClavier < 100)
-                {
-                    latDestination = 44.9;//le cheylard
-                    lonDestination = 4.4167;
-                    villeDestination = "Le Cheylard";
-                }else
-                {
-                    latDestination = 43.610769;//mtp
-                    lonDestination = 3.876716;
-                    villeDestination = "Montpellier";
-                }*/
-
-
                 double LatDest = Double.parseDouble(gps[0]);
                 double LonDest = Double.parseDouble(gps[1]);
 
