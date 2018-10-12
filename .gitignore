@@ -3,3 +3,7 @@
 workspace.xml
 tasks.xml
 target
+
+java/data/
+
+java/data/societeTest.csv
