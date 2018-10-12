@@ -8,12 +8,20 @@ public class CommuneDao
 {
     private boolean header;
 
+    /**
+     *
+     * @param header
+     */
     public CommuneDao(boolean header)
     {
         this.header = header;
     }
 
-
+    /**
+     *
+     * @param filepath
+     * @return Map<String, String[]> resultCommune
+     */
     public Map<String, String[]> readBuffered(String filepath)
     {
         Map<String, String[]> mapKeyValueCommune = new HashMap<String, String[]>();

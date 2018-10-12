@@ -5,11 +5,21 @@ public class SocieteDao
 {
     private boolean header;
 
+    /**
+     *
+     * @param header
+     */
     public SocieteDao(boolean header)
     {
         this.header = header;
     }
 
+    /**
+     *
+     * @param filepath
+     * @param resultCommune
+     * @return List<Map<String, Object>> resultSociete
+     */
       public List<Map<String, Object>> readBuffered(String filepath, Map<String, String[]> resultCommune)
       {
         List<Map<String, Object>> list = new ArrayList<>();
@@ -46,7 +56,7 @@ public class SocieteDao
 
                 double result = distance_Between_LatLong(latSource, lonSource, LatDest, LonDest);
 
-                if (result < 50)//definie la distance(rayon) en km à partir du point de reference Valence
+                if (result < 100)//definie la distance(rayon) en km à partir du point de reference Valence
                 {
                     mapKeyValueSociete.put("name", champs[2].trim());
                     mapKeyValueSociete.put("city", champs[28].trim());
@@ -70,6 +80,14 @@ public class SocieteDao
         return list;
     }
 
+    /**
+     *
+     * @param lat1
+     * @param lon1
+     * @param latDestination
+     * @param lonDestination
+     * @return double result
+     */
     public static double distance_Between_LatLong(double lat1, double lon1, double latDestination, double lonDestination)//calcul la distance entre deux points gps
     {
         lat1 = Math.toRadians(lat1);
@@ -84,23 +102,33 @@ public class SocieteDao
         return result;
     }
 
+    /**
+     *
+     * @param resultSociete
+     * @return List<Map<String, String>> resultListSector
+     */
     public List<Map<String, String>> listSector(List<Map<String, Object>> resultSociete)//retourne une list map string string pour display les sectors et le nombre de societe de ce sector
     {
         SocieteDao listSector1 = new SocieteDao(true);
 
-        List<Map<String, Integer>> listSector1Result = listSector1.listSectorFct1(resultSociete);//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
-
         SocieteDao listSectorFct2 = new SocieteDao(true);
 
-        List<Map<String, Integer>> listSector2Result = listSectorFct2.listSectorFct2(listSector1Result);//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
-
         SocieteDao listSectorFct3 = new SocieteDao(true);
+
+        List<Map<String, Integer>> listSector1Result = listSector1.listSectorFct1(resultSociete);//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
+
+        List<Map<String, Integer>> listSector2Result = listSectorFct2.listSectorFct2(listSector1Result);//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
 
         List<Map<String, String>> listSectorFct3Result = listSectorFct3.listSectorFct3(listSector2Result);//cree une list map string string avec (sector=fleuriste, value=12)
 
         return listSectorFct3Result;//retourne une list map string string -> (sector=fleuriste, value=12)
     }
 
+    /**
+     *
+     * @param resultSociete
+     * @return List<Map<String, Integer>> listSector1Result
+     */
     public List<Map<String, Integer>> listSectorFct1(List<Map<String, Object>> resultSociete)//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
     {
         List<Map<String, Integer>> list = new ArrayList<>();
@@ -125,10 +153,14 @@ public class SocieteDao
             }
             list.add(mapKeyValueSectorTemp);
         }
-
         return list;
     }
 
+    /**
+     *
+     * @param listFct1Result
+     * @return List<Map<String, Integer>> listSector2Result
+     */
     public List<Map<String, Integer>> listSectorFct2(List<Map<String, Integer>> listFct1Result)//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
     {
         List<Map<String, Integer>> listTemp = new ArrayList<>();
@@ -169,10 +201,14 @@ public class SocieteDao
             }
             listTemp.add(mapKeyValueSectorOut);
         }
-
         return listTemp;
     }
 
+    /**
+     *
+     * @param listFct2Result
+     * @return List<Map<String, String>> listSectorFct3Result
+     */
     public List<Map<String, String>> listSectorFct3(List<Map<String, Integer>> listFct2Result)//cree une list map string string avec (sector=fleuriste, value=12)
     {
         List<Map<String, String>> listOut = new ArrayList<>();
