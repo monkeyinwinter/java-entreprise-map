@@ -13,7 +13,6 @@ public class Pays {
 
     }
 
-
     public void setId(String id) {//setter id
         this.id = id;
     }
@@ -41,7 +40,5 @@ public class Pays {
                 getName() +
                 getCode();
     }
-
-
 
 }

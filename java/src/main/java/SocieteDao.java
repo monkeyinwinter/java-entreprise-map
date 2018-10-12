@@ -1,37 +1,31 @@
-
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
-public class SocieteDao {
-
+public class SocieteDao
+{
     private boolean header;
 
-    public SocieteDao(boolean header) {
+    public SocieteDao(boolean header)
+    {
         this.header = header;
     }
 
       public List<Map<String, Object>> readBuffered(String filepath, Map<String, String[]> resultCommune)
-    {
+      {
         List<Map<String, Object>> list = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath)))
+        {
 
             String ligne = null;
-
 
             if (this.header == true)
             {
                 br.readLine();
             }
 
-            while ((ligne = br.readLine()) != null) {
-
+            while ((ligne = br.readLine()) != null)
+            {
                 Map<String, Object> mapKeyValueSociete = new HashMap<String, Object>();
 
                 String lignex = ligne.replace("\"", "");
@@ -47,13 +41,12 @@ public class SocieteDao {
 
 
                 // calcul distance entre point[] et gps[]
-/*                System.out.println(" lat (gps[0]) = " + gps[0] + " / lon (gps[1] = " + gps[1]);*/
-/*                Scanner entréeClavier = new Scanner(System.in);*/
-/*                System.out.println("Veuillez saisir un chiffre superieur ou inférieur à 100 :");*/
-/*                Integer resultEntréeClavier = entréeClavier.nextInt();*/
-/*                double latDestination;
-                double lonDestination;*/
-/*                if(resultEntréeClavier < 100)
+                /*Scanner entréeClavier = new Scanner(System.in);
+                System.out.println("Veuillez saisir un chiffre superieur ou inférieur à 100 :");
+                Integer resultEntréeClavier = entréeClavier.nextInt();
+                double latDestination;
+                double lonDestination;
+                if(resultEntréeClavier < 100)
                 {
                     latDestination = 44.9;//le cheylard
                     lonDestination = 4.4167;
@@ -74,7 +67,7 @@ public class SocieteDao {
 
                 double result = distance_Between_LatLong(latSource, lonSource, LatDest, LonDest);
 
-                if (result < 10)
+                if (result < 100)//definie la distance(rayon) en km à partir du point de reference Valence
                 {
                     mapKeyValueSociete.put("name", champs[2].trim());
                     mapKeyValueSociete.put("city", champs[28].trim());
@@ -91,33 +84,35 @@ public class SocieteDao {
                 }
             }
 
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         return list;
     }
 
-    public static double distance_Between_LatLong(double lat1, double lon1, double latDestination, double lonDestination) {
+    public static double distance_Between_LatLong(double lat1, double lon1, double latDestination, double lonDestination)//calcul la distance entre deux points gps
+    {
         lat1 = Math.toRadians(lat1);
         lon1 = Math.toRadians(lon1);
         latDestination = Math.toRadians(latDestination);
         lonDestination = Math.toRadians(lonDestination);
 
-        double earthRadius = 6371.01; //Kilometers
-        return earthRadius * Math.acos(Math.sin(lat1)*Math.sin(latDestination) + Math.cos(lat1)*Math.cos(latDestination)*Math.cos(lon1 - lonDestination));
+        double earthRadius = 6371.01; //Kilometers diametre de la terre
+
+        double result = earthRadius * Math.acos(Math.sin(lat1)*Math.sin(latDestination) + Math.cos(lat1)*Math.cos(latDestination)*Math.cos(lon1 - lonDestination));
+
+        return result;
     }
 
 
-    public List<Map<String, String>> listSector(List<Map<String, Object>> resultSociete)
+    public List<Map<String, String>> listSector(List<Map<String, Object>> resultSociete)//retourne une list map string string pour display les sectors et le nombre de societe de ce sector
     {
         List<Map<String, Integer>> list = new ArrayList<>();
-        List<Map<String, Integer>> listTemp = new ArrayList<>();
-        List<Map<String, Integer>> listOut = new ArrayList<>();
-        List<Map<String, String>> listOutLast = new ArrayList<>();
 
         Integer count = 1;
 
-        for (Map<String, Object> resultSociete2 : resultSociete)
+        for (Map<String, Object> resultSociete2 : resultSociete)//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
         {
             Map<String, Integer> mapKeyValueSectorTemp = new HashMap<String, Integer>();
 
@@ -133,14 +128,16 @@ public class SocieteDao {
                     mapKeyValueSectorTemp.put(valueConvert, count );
                 }
             }
-            listTemp.add(mapKeyValueSectorTemp);
+            list.add(mapKeyValueSectorTemp);
         }
+
+        List<Map<String, Integer>> listTemp = new ArrayList<>();
 
         Map<String, Integer> mapKeyValueSectorOut = new HashMap<String, Integer>();
 
-        for ( Integer i = 0 ; i < 1 ; i++)
+        for ( Integer i = 0 ; i < 1 ; i++)//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
         {
-            for (Map<String, Integer> listTemp2 : listTemp)
+            for (Map<String, Integer> listTemp2 : list)
             {
                 for (Map.Entry<String, Integer> listTemp3 : listTemp2.entrySet())
                 {
@@ -162,22 +159,18 @@ public class SocieteDao {
                                 mapKeyValueSectorOut.put(sector2, test2);
                             }
                         }
-
-                        continue;
                     }else
                     {
                         mapKeyValueSectorOut.put(sector2, count );
                     }
-
                 }
             }
-
-            listOut.add(mapKeyValueSectorOut);
-/*                    System.out.println(mapKeyValueSectorOut);*/
+            listTemp.add(mapKeyValueSectorOut);
         }
-/*        System.out.println(listOut);*/
 
-        for (Map<String, Integer> listOut2 : listOut)
+        List<Map<String, String>> listOut = new ArrayList<>();
+
+        for (Map<String, Integer> listOut2 : listTemp)//cree une list map string string avec (sector=fleuriste, value=12)
         {
             for (Map.Entry<String, Integer> resultSociete3 : listOut2.entrySet())
             {
@@ -193,14 +186,12 @@ public class SocieteDao {
                 mapKeyValueSectorLast.put(sectorTitre, sector);
                 mapKeyValueSectorLast.put(valueTitre, valueAsString);
 
-/*                System.out.println(mapKeyValueSectorLast);*/
-                listOutLast.add(mapKeyValueSectorLast);
+                listOut.add(mapKeyValueSectorLast);
             }
-
         }
 
-/*        System.out.println(listOutLast);*/
-        return listOutLast;
+        return listOut;//retourne une list map string string -> (sector=fleuriste, value=12)
     }
+
 }
 

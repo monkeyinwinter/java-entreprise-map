@@ -5,8 +5,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
-
 public class PaysDao
 {
     private boolean header;
@@ -18,8 +16,6 @@ public class PaysDao
 
     public List<TitrePays> readTitre(String filepath) throws IOException
     {
-
-        String lignePropreTitre;
         String[] champsTitre;
         String id;
         Path path = Paths.get(filepath);
@@ -70,8 +66,6 @@ public class PaysDao
 
             String ligneBrut1 = lignes.get(i);
 
-
-
             String ligneBrut2 = ligneBrut1.replaceAll("\"", " separateur ");//pour fichier 6 guillemets
 
             if (ligneBrut2.contains(" separateur "))// pour test fichier 6
@@ -104,13 +98,6 @@ public class PaysDao
         }
         return mylist;
     }
-
-/*    public List<Map<String, String>> MergeTitrePays(String listTitre, String listPays) throws IOException {
-        List<Map<String, String>> test = new ArrayList<Map<String, String>>();
-
-        return test;
-    }*/
-
 
 }
 

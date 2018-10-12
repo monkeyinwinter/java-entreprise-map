@@ -22,20 +22,20 @@ public class Societe {
     }
 
     public void setName(String name)
-    {//setter Societe
+    {//setter setName
         this.name = name;
     }
     public String getName()
-    {// getter Societe
+    {// getter getName
         return this.name;
     }
 
     public void setCity(String city)
-    {//setter commune
+    {//setter setCity
         this.city = city;
     }
     public String getCity()
-    {// getter commune
+    {// getter getCity
         return this.city;
     }
 

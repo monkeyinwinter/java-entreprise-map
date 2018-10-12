@@ -1,39 +1,31 @@
 import com.google.gson.Gson;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main
 {
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
-        System.out.println("ça commence !!!");
-        long debut = System.currentTimeMillis();
+        System.out.println("Départ du chrono\n");
+        long debut = System.currentTimeMillis();//calcul le temps d'execution du programme
 
         CommuneDao dao = new CommuneDao(true);
         Map<String, String[]> resultCommune = dao.readBuffered("data/ville.csv");
-/*        System.out.println(resultCommune);*/
 
         SocieteDao societeDao = new SocieteDao(true);
-        List<Map<String, Object>> resultSociete = societeDao.readBuffered("data/societeTest.csv", resultCommune);
-/*        System.out.println(resultSociete);*/
+        List<Map<String, Object>> resultSociete = societeDao.readBuffered("data/societe.csv", resultCommune);
 
         SocieteDao societeDaoList = new SocieteDao(true);
         List<Map<String, String>> resultListSector = societeDaoList.listSector(resultSociete);
-/*        System.out.println(resultListSector);*/
 
         Gson gson = new Gson();//converti list map string string en json
         String resultSocieteJson = gson.toJson(resultSociete);
-/*        System.out.println(resultSocieteJson);*/
-
 
         Gson gson2 = new Gson();//converti list map string string en json
         String resultListSectorJson = gson2.toJson(resultListSector);
-/*        System.out.println(resultListSectorJson);*/
 
         try
         {
@@ -41,7 +33,8 @@ public class Main
             writer.write(resultSocieteJson);
             writer.close();
 
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
@@ -51,17 +44,19 @@ public class Main
             writer.write(resultListSectorJson);
             writer.close();
 
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
-        DecimalFormat f = new DecimalFormat();
+        DecimalFormat f = new DecimalFormat();//arrondi à deux décimales
         f.setMaximumFractionDigits(2);
 
-        System.out.println("c est fini !!! " + f.format((System.currentTimeMillis()-debut)*0.001) + " secondes");
+        System.out.println("Arret du chrono, temps d'éxecution => " + f.format((System.currentTimeMillis()-debut)*0.001) + " secondes");//affiche le temps d'execution
 
 
 
+/*
 
 
         PaysDao paysDao = new PaysDao(true);
@@ -120,6 +115,7 @@ public class Main
             listeKeyValuePays.add(mapKeyValuePays);
         }
 
+*/
 
 
 
