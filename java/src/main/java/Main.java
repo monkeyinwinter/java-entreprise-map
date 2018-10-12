@@ -18,14 +18,8 @@ public class Main
         SocieteDao societeDao = new SocieteDao(true);
         List<Map<String, Object>> resultSociete = societeDao.readBuffered("data/societe.csv", resultCommune);
 
-        SocieteDao societeDaoList = new SocieteDao(true);
-        List<Map<String, String>> resultListSector = societeDaoList.listSector(resultSociete);
-
         Gson gson = new Gson();//converti list map string string en json
         String resultSocieteJson = gson.toJson(resultSociete);
-
-        Gson gson2 = new Gson();//converti list map string string en json
-        String resultListSectorJson = gson2.toJson(resultListSector);
 
         try
         {
@@ -37,6 +31,12 @@ public class Main
         {
             e.printStackTrace();
         }
+
+        SocieteDao societeDaoList = new SocieteDao(true);
+        List<Map<String, String>> resultListSector = societeDaoList.listSector(resultSociete);
+
+        Gson gson2 = new Gson();//converti list map string string en json
+        String resultListSectorJson = gson2.toJson(resultListSector);
 
         try
         {

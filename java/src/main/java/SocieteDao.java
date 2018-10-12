@@ -16,7 +16,6 @@ public class SocieteDao
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath)))
         {
-
             String ligne = null;
 
             if (this.header == true)
@@ -47,7 +46,7 @@ public class SocieteDao
 
                 double result = distance_Between_LatLong(latSource, lonSource, LatDest, LonDest);
 
-                if (result < 100)//definie la distance(rayon) en km à partir du point de reference Valence
+                if (result < 50)//definie la distance(rayon) en km à partir du point de reference Valence
                 {
                     mapKeyValueSociete.put("name", champs[2].trim());
                     mapKeyValueSociete.put("city", champs[28].trim());
@@ -85,14 +84,30 @@ public class SocieteDao
         return result;
     }
 
-
     public List<Map<String, String>> listSector(List<Map<String, Object>> resultSociete)//retourne une list map string string pour display les sectors et le nombre de societe de ce sector
+    {
+        SocieteDao listSector1 = new SocieteDao(true);
+
+        List<Map<String, Integer>> listSector1Result = listSector1.listSectorFct1(resultSociete);//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
+
+        SocieteDao listSectorFct2 = new SocieteDao(true);
+
+        List<Map<String, Integer>> listSector2Result = listSectorFct2.listSectorFct2(listSector1Result);//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
+
+        SocieteDao listSectorFct3 = new SocieteDao(true);
+
+        List<Map<String, String>> listSectorFct3Result = listSectorFct3.listSectorFct3(listSector2Result);//cree une list map string string avec (sector=fleuriste, value=12)
+
+        return listSectorFct3Result;//retourne une list map string string -> (sector=fleuriste, value=12)
+    }
+
+    public List<Map<String, Integer>> listSectorFct1(List<Map<String, Object>> resultSociete)//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
     {
         List<Map<String, Integer>> list = new ArrayList<>();
 
         Integer count = 1;
 
-        for (Map<String, Object> resultSociete2 : resultSociete)//recupere les keys et values sector de la map et cree une list map string string -> (fleuriste=1)
+        for (Map<String, Object> resultSociete2 : resultSociete)
         {
             Map<String, Integer> mapKeyValueSectorTemp = new HashMap<String, Integer>();
 
@@ -111,13 +126,20 @@ public class SocieteDao
             list.add(mapKeyValueSectorTemp);
         }
 
+        return list;
+    }
+
+    public List<Map<String, Integer>> listSectorFct2(List<Map<String, Integer>> listFct1Result)//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
+    {
         List<Map<String, Integer>> listTemp = new ArrayList<>();
 
         Map<String, Integer> mapKeyValueSectorOut = new HashMap<String, Integer>();
 
-        for ( Integer i = 0 ; i < 1 ; i++)//supprime les doublons et incemente la valeur associé à la key -> (fleuriste=12)
+        Integer count = 1;
+
+        for ( Integer i = 0 ; i < 1 ; i++)
         {
-            for (Map<String, Integer> listTemp2 : list)
+            for (Map<String, Integer> listTemp2 : listFct1Result)
             {
                 for (Map.Entry<String, Integer> listTemp3 : listTemp2.entrySet())
                 {
@@ -148,9 +170,14 @@ public class SocieteDao
             listTemp.add(mapKeyValueSectorOut);
         }
 
+        return listTemp;
+    }
+
+    public List<Map<String, String>> listSectorFct3(List<Map<String, Integer>> listFct2Result)//cree une list map string string avec (sector=fleuriste, value=12)
+    {
         List<Map<String, String>> listOut = new ArrayList<>();
 
-        for (Map<String, Integer> listOut2 : listTemp)//cree une list map string string avec (sector=fleuriste, value=12)
+        for (Map<String, Integer> listOut2 : listFct2Result)
         {
             for (Map.Entry<String, Integer> resultSociete3 : listOut2.entrySet())
             {
@@ -169,8 +196,7 @@ public class SocieteDao
                 listOut.add(mapKeyValueSectorLast);
             }
         }
-
-        return listOut;//retourne une list map string string -> (sector=fleuriste, value=12)
+        return listOut;
     }
 
 }
